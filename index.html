@@ -85,12 +85,13 @@
     }
 
     .sparkle-layer::after {
-      opacity: 0.25;
+      opacity: 0.30;
       background-image:
-        radial-gradient(circle, rgba(255,255,255,0.95) 0 1.4px, transparent 2.4px),
-        radial-gradient(circle, rgba(160, 215, 255, 0.85) 0 2px, transparent 3px);
-      background-size: 300px 300px, 440px 440px;
-      background-position: 120px 40px, 40px 180px;
+        radial-gradient(circle, rgba(255,255,255,0.98) 0 1.5px, transparent 2.5px),
+        radial-gradient(circle, rgba(160, 215, 255, 0.90) 0 2.2px, transparent 3.2px),
+        radial-gradient(circle, rgba(210, 240, 255, 0.70) 0 1.2px, transparent 2.1px);
+      background-size: 180px 180px, 300px 300px, 420px 420px;
+      background-position: 120px 40px, 40px 180px, 200px 100px;
       animation: sparkleFallWide 22s linear infinite;
     }
 
@@ -123,13 +124,13 @@
       font-size: 1rem;
       cursor: pointer;
       transition: 0.24s ease;
-      box-shadow: 0 0 16px rgba(127, 209, 255, $1);
+      box-shadow: 0 0 16px rgba(127, 209, 255, 0.20);
     }
 
     .music-button:hover {
       background: linear-gradient(145deg, #7fd1ff, #aee4ff);
       color: #111;
-      box-shadow: 0 0 16px rgba(127, 209, 255, $1);
+      box-shadow: 0 0 16px rgba(127, 209, 255, 0.35);
     }
 
     .menu-panel {
@@ -137,7 +138,7 @@
       border: 3px solid #7fd1ff;
       border-radius: 24px;
       background: linear-gradient(145deg, rgba(17,17,17,0.96), rgba(29,29,34,0.96));
-      box-shadow: 0 0 24px rgba(127, 209, 255, $1);
+      box-shadow: 0 0 24px rgba(127, 209, 255, 0.20);
       padding: 22px;
     }
 
@@ -146,7 +147,7 @@
       font-size: 1.7rem;
       margin: 0 0 18px;
       letter-spacing: 1px;
-      text-shadow: 0 0 10px rgba(127, 209, 255, $1);
+      text-shadow: 0 0 10px rgba(127, 209, 255, 0.35);
     }
 
     .top-level {
@@ -157,16 +158,16 @@
     }
 
     details.menu-group {
-      border: 2px solid rgba(127, 209, 255, $1);
+      border: 2px solid rgba(127, 209, 255, 0.85);
       border-radius: 18px;
       background: linear-gradient(145deg, #151515, #101014);
       overflow: hidden;
       min-height: 64px;
-      box-shadow: 0 0 14px rgba(127, 209, 255, $1);
+      box-shadow: 0 0 14px rgba(127, 209, 255, 0.12);
     }
 
     details.menu-group[open] {
-      box-shadow: 0 0 16px rgba(150, 205, 255, 0.16), 0 0 14px rgba(127, 209, 255, $1);
+      box-shadow: 0 0 16px rgba(150, 205, 255, 0.16), 0 0 14px rgba(127, 209, 255, 0.14);
     }
 
     summary.menu-button {
@@ -205,7 +206,7 @@
       flex-direction: column;
       gap: 8px;
       padding: 12px;
-      border-top: 1px solid rgba(127, 209, 255, $1);
+      border-top: 1px solid rgba(127, 209, 255, 0.28);
       background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
     }
 
@@ -213,7 +214,7 @@
       display: block;
       text-decoration: none;
       color: #cfeeff;
-      border: 1px solid rgba(127, 209, 255, $1);
+      border: 1px solid rgba(127, 209, 255, 0.70);
       border-radius: 12px;
       padding: 10px 12px;
       background: linear-gradient(145deg, #19191b, #111114);
@@ -225,7 +226,7 @@
     .menu-link:hover {
       background: #7fd1ff;
       color: #111;
-      box-shadow: 0 0 10px rgba(127, 209, 255, $1);
+      box-shadow: 0 0 10px rgba(127, 209, 255, 0.30);
       transform: translateY(-1px);
     }
 
@@ -256,7 +257,7 @@
 
     .welcome-box {
       margin-top: 22px;
-      border: 2px solid rgba(127, 209, 255, $1);
+      border: 2px solid rgba(127, 209, 255, 0.55);
       border-radius: 18px;
       padding: 18px 20px;
       background: linear-gradient(145deg, rgba(20,20,24,0.92), rgba(11,11,15,0.92));
@@ -293,7 +294,7 @@
 
     @keyframes sparkleFallWide {
       0% { transform: translateY(-12%) translateX(0); opacity: 0.12; }
-      20% { opacity: 0.28; }
+      20% { opacity: 0.32; }
       100% { transform: translateY(112%) translateX(-42px); opacity: 0.12; }
     }
 
@@ -315,21 +316,67 @@
 
       .music-button {
         width: min(100%, 520px);
-        font-size: 0.95rem;
+        font-size: 0.86rem;
+        padding: 10px 14px;
+        border-radius: 14px;
       }
 
       .menu-panel {
-        padding: 16px;
-        border-radius: 20px;
+        padding: 12px;
+        border-radius: 18px;
+      }
+
+      .menu-title {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
       }
 
       .top-level {
         grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      details.menu-group {
+        border-radius: 14px;
+        min-height: 46px;
       }
 
       summary.menu-button {
-        min-height: 58px;
-        font-size: 0.95rem;
+        min-height: 46px;
+        padding: 10px 10px;
+        font-size: 0.82rem;
+        letter-spacing: 0.2px;
+      }
+
+      .submenu,
+      .subsubmenu {
+        gap: 6px;
+        padding: 8px;
+      }
+
+      .menu-link {
+        padding: 7px 8px;
+        font-size: 0.78rem;
+        border-radius: 9px;
+      }
+
+      summary.nested-button {
+        padding: 8px 8px;
+        font-size: 0.76rem;
+      }
+
+      .welcome-box {
+        margin-top: 14px;
+        padding: 12px 12px;
+      }
+
+      .welcome-box h2 {
+        font-size: 1rem;
+      }
+
+      .welcome-box p {
+        font-size: 0.82rem;
+        line-height: 1.5;
       }
     }
   </style>
@@ -337,6 +384,7 @@
 <body>
   <div class="snow-layer"></div>
   <div class="sparkle-layer"></div>
+
   <main class="page">
     <div class="logo-wrap">
       <img src="banner_principal.png" alt="Aldoryn">
@@ -475,17 +523,6 @@
 
       let audioAtivado = false;
       let ultimoHover = 0;
-
-      function tocarBase(audio, volume = 1) {
-        if (!audio) return;
-        try {
-          audio.pause();
-          audio.currentTime = 0;
-          audio.volume = volume;
-          const p = audio.play();
-          if (p && typeof p.catch === 'function') p.catch(() => {});
-        } catch (e) {}
-      }
 
       function tocarClone(audio, volume = 1) {
         if (!audio) return;
