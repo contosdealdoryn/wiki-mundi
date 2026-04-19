@@ -53,7 +53,8 @@
       object-fit: contain;
       image-rendering: auto;
       transform: translateZ(0);
-      filter: drop-shadow(0 0 24px rgba(0,0,0,0.75));
+      filter: drop-shadow(0 0 12px rgba(0,0,0,0.75));
+      animation: entrarMid 1.2s ease-out both;
     }
 
     .left img.char {
@@ -67,6 +68,7 @@
       image-rendering: auto;
       transform: translateZ(0);
       filter: drop-shadow(0 0 18px rgba(0,0,0,0.9));
+      animation: entrarChar 1.2s ease-out both;
     }
 
     .left-effects {
@@ -110,7 +112,7 @@
 
     .title {
       text-align: center;
-      font-size: 45px;
+      font-size: 36px;
       margin-bottom: 25px;
       font-weight: bold;
       letter-spacing: 2px;
@@ -173,7 +175,29 @@
       transform: scale(1.03);
     }
 
-    @keyframes auraPulse {
+    @keyframes entrarMid {
+      from {
+        transform: translateX(220px) translateZ(0);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0) translateZ(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes entrarChar {
+      from {
+        transform: translateX(-220px) translateZ(0);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0) translateZ(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes auraPul
       from {
         transform: scale(1);
         opacity: 0.9;
