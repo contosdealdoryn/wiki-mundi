@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wiki RPG</title>
+  <title>Os Contos de Aldoryn - Wiki</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
@@ -112,7 +112,7 @@
 
     .title {
       text-align: center;
-      font-size: 36px;
+      font-size: 45px;
       margin-bottom: 25px;
       font-weight: bold;
       letter-spacing: 2px;
@@ -197,7 +197,7 @@
       }
     }
 
-    @keyframes auraPul
+    @keyframes auraPulse {
       from {
         transform: scale(1);
         opacity: 0.9;
@@ -370,5 +370,42 @@
       </div>
     </div>
   </div>
-</body>
+  <audio id="somHover" src="mouse_acima.mp3" preload="auto"></audio>
+  <audio id="somEntrada" src="char_aparece.mp3" preload="auto"></audio>
+  <audio id="somClique" src="clique_acima.mp3" preload="auto"></audio>
+
+  <script>
+    const somHover = document.getElementById('somHover');
+    const somEntrada = document.getElementById('somEntrada');
+    const somClique = document.getElementById('somClique');
+    const links = document.querySelectorAll('a');
+
+    let audioLiberado = false;
+
+    function tocarSom(audio, volume = 1) {
+      if (!audio) return;
+      try {
+        audio.pause();
+        audio.currentTime = 0;
+        audio.volume = volume;
+        const tentativa = audio.play();
+        if (tentativa && typeof tentativa.catch === 'function') {
+          tentativa.catch(() => {});
+        }
+      } catch (e) {}
+    }
+
+    function liberarAudio() {
+      if (audioLiberado) return;
+      audioLiberado = true;
+      tocarSom(somEntrada, 0.7);
+    }
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        tocarSom(somEntrada, 0.7);
+      }, 120);
+    });
+
+    document.addEventListener('click', liberarAudio, { once: true });
 </html>
