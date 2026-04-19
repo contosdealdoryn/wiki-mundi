@@ -32,19 +32,37 @@
       position: relative;
       overflow: hidden;
       box-shadow: 0 0 20px rgba(201,164,76,0.3);
-      background: linear-gradient(145deg, #111, #1c1c1c);
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)),
+                  url('fundo.png') center/cover no-repeat;
     }
 
     .left img {
       position: relative;
       z-index: 3;
-      max-height: 94%;
-      max-width: 52%;
       object-fit: contain;
-      margin-right: 20px;
+    }
+
+    .left img.mid {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      max-height: 90%;
+      max-width: 60%;
+      z-index: 2;
+      -webkit-mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
+      mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.8));
+    }
+
+    .left img.char {
+      position: relative;
+      right: 10px;
+      max-height: 95%;
+      max-width: 50%;
+      z-index: 4;
+      -webkit-mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
+      mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
       filter: drop-shadow(0 0 18px rgba(0,0,0,0.9));
-      -webkit-mask-image: radial-gradient(circle at center, black 68%, transparent 100%);
-      mask-image: radial-gradient(circle at center, black 68%, transparent 100%);
     }
 
     .right {
@@ -86,6 +104,7 @@
       text-align: center;
       box-sizing: border-box;
     }
+
     .label.vazio {
       visibility: hidden;
     }
@@ -121,8 +140,7 @@
       position: absolute;
       inset: 0;
       z-index: 1;
-      background: url('imagem-completa.png') left center/cover no-repeat;
-      filter: brightness(0.78) saturate(1.05);
+      background: transparent;
     }
 
     .left-effects {
@@ -186,6 +204,9 @@
     <!-- ESQUERDA -->
     <div class="left">
       <div class="left-bg"></div>
+      <img class="mid" src="ragardo_mid.png" alt="Arte">
+      <img class="char" src="ragardo_png.png" alt="Personagem">
+    </div>
       <div class="left-effects"></div>
       <img src="ragardo.png" alt="Personagem">
     </div>
@@ -264,9 +285,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
