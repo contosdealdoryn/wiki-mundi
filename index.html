@@ -19,7 +19,7 @@
         radial-gradient(circle at 20% 18%, rgba(190, 230, 255, 0.18), transparent 20%),
         radial-gradient(circle at 80% 12%, rgba(150, 210, 255, 0.12), transparent 16%),
         linear-gradient(180deg, #204a7f 0%, #173a68 24%, #102a4d 54%, #0a1d35 78%, #06111f 100%);
-      color: #e6d3a3;
+      color: #cfeeff;
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
@@ -114,30 +114,30 @@
     }
 
     .music-button {
-      border: 2px solid #c9a44c;
+      border: 2px solid #7fd1ff;
       border-radius: 18px;
       padding: 14px 24px;
       background: linear-gradient(145deg, #151515, #101014);
-      color: #e6d3a3;
+      color: #cfeeff;
       font-family: inherit;
       font-size: 1rem;
       cursor: pointer;
       transition: 0.24s ease;
-      box-shadow: 0 0 16px rgba(201, 164, 76, 0.14);
+      box-shadow: 0 0 16px rgba(127, 209, 255, $1);
     }
 
     .music-button:hover {
-      background: linear-gradient(145deg, #c9a44c, #e0c069);
+      background: linear-gradient(145deg, #7fd1ff, #aee4ff);
       color: #111;
-      box-shadow: 0 0 16px rgba(201, 164, 76, 0.35);
+      box-shadow: 0 0 16px rgba(127, 209, 255, $1);
     }
 
     .menu-panel {
       margin-top: 6px;
-      border: 3px solid #c9a44c;
+      border: 3px solid #7fd1ff;
       border-radius: 24px;
       background: linear-gradient(145deg, rgba(17,17,17,0.96), rgba(29,29,34,0.96));
-      box-shadow: 0 0 24px rgba(201, 164, 76, 0.2);
+      box-shadow: 0 0 24px rgba(127, 209, 255, $1);
       padding: 22px;
     }
 
@@ -146,7 +146,7 @@
       font-size: 1.7rem;
       margin: 0 0 18px;
       letter-spacing: 1px;
-      text-shadow: 0 0 10px rgba(201, 164, 76, 0.45);
+      text-shadow: 0 0 10px rgba(127, 209, 255, $1);
     }
 
     .top-level {
@@ -157,16 +157,16 @@
     }
 
     details.menu-group {
-      border: 2px solid rgba(201, 164, 76, 0.85);
+      border: 2px solid rgba(127, 209, 255, $1);
       border-radius: 18px;
       background: linear-gradient(145deg, #151515, #101014);
       overflow: hidden;
       min-height: 64px;
-      box-shadow: 0 0 14px rgba(201, 164, 76, 0.12);
+      box-shadow: 0 0 14px rgba(127, 209, 255, $1);
     }
 
     details.menu-group[open] {
-      box-shadow: 0 0 16px rgba(150, 205, 255, 0.16), 0 0 14px rgba(201, 164, 76, 0.14);
+      box-shadow: 0 0 16px rgba(150, 205, 255, 0.16), 0 0 14px rgba(127, 209, 255, $1);
     }
 
     summary.menu-button {
@@ -176,7 +176,7 @@
       padding: 16px 14px;
       text-align: center;
       font-size: 0.98rem;
-      color: #e6d3a3;
+      color: #cfeeff;
       background: linear-gradient(145deg, #1a1a1d, #101013);
       transition: 0.25s ease;
       min-height: 64px;
@@ -194,7 +194,7 @@
 
     details.menu-group[open] > summary.menu-button,
     summary.menu-button:hover {
-      background: linear-gradient(145deg, #c9a44c, #e0c069);
+      background: linear-gradient(145deg, #7fd1ff, #aee4ff);
       color: #111;
       text-shadow: none;
     }
@@ -205,15 +205,15 @@
       flex-direction: column;
       gap: 8px;
       padding: 12px;
-      border-top: 1px solid rgba(201, 164, 76, 0.26);
+      border-top: 1px solid rgba(127, 209, 255, $1);
       background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
     }
 
     .menu-link {
       display: block;
       text-decoration: none;
-      color: #e6d3a3;
-      border: 1px solid rgba(201, 164, 76, 0.7);
+      color: #cfeeff;
+      border: 1px solid rgba(127, 209, 255, $1);
       border-radius: 12px;
       padding: 10px 12px;
       background: linear-gradient(145deg, #19191b, #111114);
@@ -223,9 +223,9 @@
     }
 
     .menu-link:hover {
-      background: #c9a44c;
+      background: #7fd1ff;
       color: #111;
-      box-shadow: 0 0 10px rgba(201, 164, 76, 0.42);
+      box-shadow: 0 0 10px rgba(127, 209, 255, $1);
       transform: translateY(-1px);
     }
 
@@ -256,7 +256,7 @@
 
     .welcome-box {
       margin-top: 22px;
-      border: 2px solid rgba(201, 164, 76, 0.7);
+      border: 2px solid rgba(127, 209, 255, $1);
       border-radius: 18px;
       padding: 18px 20px;
       background: linear-gradient(145deg, rgba(20,20,24,0.92), rgba(11,11,15,0.92));
@@ -270,7 +270,7 @@
 
     .welcome-box p {
       margin: 0;
-      color: #eadfb8;
+      color: #d9f3ff;
       line-height: 1.7;
       font-size: 0.98rem;
     }
@@ -343,11 +343,11 @@
     </div>
 
     <div class="music-button-wrap">
-      <button id="musicButton" class="music-button">Seja bem vindo ao fantástico mundo mágico de Aldoryn...</button>
+      <button id="musicButton" class="music-button">(BGM) Seja bem vindo ao fantástico mundo mágico de Aldoryn...</button>
     </div>
 
     <section class="menu-panel">
-      <h2 class="menu-title">Grandes Arquivos de Aldoryn</h2>
+      <h2 class="menu-title">GrandesArquivos de Aldoryn</h2>
 
       <div class="top-level">
         <details class="menu-group">
