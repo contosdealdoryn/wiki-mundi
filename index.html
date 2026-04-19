@@ -375,18 +375,21 @@
   <audio id="somClique" src="clique_acima.mp3" preload="auto"></audio>
 
   <script>
-    const somHover = document.getElementById('somHover');
-    const somEntrada = document.getElementById('somEntrada');
-    const somClique = document.getElementById('somClique');
     const links = document.querySelectorAll('a');
 
-    let audioLiberado = false;
+    const ARQUIVOS_AUDIO = {
+      hover: 'mouse_acima.mp3',
+      entrada: 'char_aparece.mp3',
+      clique: 'clique_acima.mp3'
+    };
 
-    function tocarSom(audio, volume = 1) {
-      if (!audio) return;
+    let audioLiberado = false;
+    let somEntradaJaTocou = false;
+
+    function tocarArquivo(src, volume = 1) {
       try {
-        audio.pause();
-        audio.currentTime = 0;
+        const audio = new Audio(src);
+        audio.preload = 'auto';
         audio.volume = volume;
         const tentativa = audio.play();
         if (tentativa && typeof tentativa.catch === 'function') {
@@ -398,14 +401,40 @@
     function liberarAudio() {
       if (audioLiberado) return;
       audioLiberado = true;
-      tocarSom(somEntrada, 0.7);
+
+      if (!somEntradaJaTocou) {
+        somEntradaJaTocou = true;
+        tocarArquivo(ARQUIVOS_AUDIO.entrada, 0.7);
+      }
     }
 
     window.addEventListener('load', () => {
       setTimeout(() => {
-        tocarSom(somEntrada, 0.7);
-      }, 120);
+        if (!audioLiberado && !somEntradaJaTocou) {
+          tocarArquivo(ARQUIVOS_AUDIO.entrada, 0.7);
+        }
+      }, 250);
     });
 
-    document.addEventListener('click', liberarAudio, { once: true });
+    document.addEventListener('pointerdown', liberarAudio, { once: true });
+    document.addEventListener('touchstart', liberarAudio, { once: true, passive: true });
+    document.addEventListener('keydown', liberarAudio, { once: true });
+
+    links.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        if (audioLiberado) {
+          tocarArquivo(ARQUIVOS_AUDIO.hover, 0.35);
+        }
+      });
+
+      link.addEventListener('pointerdown', () => {
+        tocarArquivo(ARQUIVOS_AUDIO.clique, 0.55);
+      });
+
+      link.addEventListener('touchstart', () => {
+        tocarArquivo(ARQUIVOS_AUDIO.clique, 0.55);
+      }, { passive: true });
+    });
+  </script>
+</body>
 </html>
