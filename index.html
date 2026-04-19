@@ -370,85 +370,86 @@
       </div>
     </div>
   </div>
-      <audio id="somHover" src="mouse_acima.mp3" preload="auto"></audio>
-  <audio id="somEntrada" src="char_aparece.mp3" preload="auto"></audio>
-  <audio id="somClique" src="clique_acima.mp3" preload="auto"></audio>
+        <audio id="somHoverBase" src="mouse_acima.mp3" preload="auto"></audio>
+  <audio id="somEntradaBase" src="char_aparece.mp3" preload="auto"></audio>
+  <audio id="somCliqueBase" src="clique_acima.mp3" preload="auto"></audio>
 
   <script>
     const links = document.querySelectorAll('a');
-    const somHover = document.getElementById('somHover');
-    const somEntrada = document.getElementById('somEntrada');
-    const somClique = document.getElementById('somClique');
+    const somHoverBase = document.getElementById('somHoverBase');
+    const somEntradaBase = document.getElementById('somEntradaBase');
+    const somCliqueBase = document.getElementById('somCliqueBase');
 
-    let entradaTocada = false;
     let audioLiberado = false;
+    let entradaTocada = false;
 
-    function tocar(audio, volume = 1) {
-      if (!audio) return;
+    function tocarClone(base, volume = 1) {
+      if (!base) return;
       try {
-        audio.pause();
-        audio.currentTime = 0;
-        audio.volume = volume;
-        const promessa = audio.play();
+        const clone = base.cloneNode(true);
+        clone.volume = volume;
+        clone.currentTime = 0;
+        const promessa = clone.play();
         if (promessa && typeof promessa.catch === 'function') {
           promessa.catch(() => {});
         }
       } catch (e) {}
     }
 
-    function liberarAudio() {
-      audioLiberado = true;
+    function tocarBase(base, volume = 1) {
+      if (!base) return;
+      try {
+        base.pause();
+        base.currentTime = 0;
+        base.volume = volume;
+        const promessa = base.play();
+        if (promessa && typeof promessa.catch === 'function') {
+          promessa.catch(() => {});
+        }
+      } catch (e) {}
     }
 
     function tocarEntrada() {
       if (entradaTocada) return;
       entradaTocada = true;
-      tocar(somEntrada, 0.7);
+      tocarBase(somEntradaBase, 0.7);
     }
 
-    // Desktop: tenta tocar na primeira movimentação/interação.
-    document.addEventListener('mousemove', () => {
-      liberarAudio();
+    function liberarAudioETocarEntrada() {
+      audioLiberado = true;
       tocarEntrada();
-    }, { once: true });
+    }
 
-    document.addEventListener('pointerdown', () => {
-      liberarAudio();
-      tocarEntrada();
-    }, { once: true });
+    // Tenta tocar na primeira interação real permitida pelo navegador.
+    ['pointerdown', 'touchstart', 'mousedown', 'keydown', 'mousemove'].forEach(evento => {
+      document.addEventListener(evento, liberarAudioETocarEntrada, { once: true, passive: true });
+    });
 
-    document.addEventListener('keydown', () => {
-      liberarAudio();
-      tocarEntrada();
-    }, { once: true });
-
-    // Mobile: autoplay é bloqueado; toca na primeira interação real.
-    document.addEventListener('touchstart', () => {
-      liberarAudio();
-      tocarEntrada();
-    }, { once: true, passive: true });
+    // Garante que, ao voltar para a página, o sistema continue responsivo.
+    window.addEventListener('pageshow', () => {
+      audioLiberado = true;
+    });
 
     links.forEach(link => {
       link.addEventListener('mouseenter', () => {
         if (audioLiberado) {
-          tocar(somHover, 0.35);
-        }
-      });
-
-      link.addEventListener('pointerenter', () => {
-        if (window.matchMedia('(pointer:fine)').matches) {
-          liberarAudio();
+          tocarClone(somHoverBase, 0.35);
         }
       });
 
       link.addEventListener('pointerdown', () => {
-        liberarAudio();
-        tocar(somClique, 0.55);
+        audioLiberado = true;
+        tocarClone(somCliqueBase, 0.55);
+      });
+
+      link.addEventListener('click', () => {
+        audioLiberado = true;
+        tocarClone(somCliqueBase, 0.55);
       });
 
       link.addEventListener('touchstart', () => {
-        liberarAudio();
-        tocar(somClique, 0.55);
+        audioLiberado = true;
+        tocarClone(somCliqueBase, 0.55);
       }, { passive: true });
     });
   </script>
