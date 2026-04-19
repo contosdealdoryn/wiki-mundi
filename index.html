@@ -370,69 +370,69 @@
       </div>
     </div>
   </div>
-  <audio id="somHover" src="mouse_acima.mp3" preload="auto"></audio>
+    <audio id="somHover" src="mouse_acima.mp3" preload="auto"></audio>
   <audio id="somEntrada" src="char_aparece.mp3" preload="auto"></audio>
   <audio id="somClique" src="clique_acima.mp3" preload="auto"></audio>
 
   <script>
     const links = document.querySelectorAll('a');
-
-    const ARQUIVOS_AUDIO = {
-      hover: 'mouse_acima.mp3',
-      entrada: 'char_aparece.mp3',
-      clique: 'clique_acima.mp3'
-    };
+    const somHover = document.getElementById('somHover');
+    const somEntrada = document.getElementById('somEntrada');
+    const somClique = document.getElementById('somClique');
 
     let audioLiberado = false;
-    let somEntradaJaTocou = false;
+    let entradaTocada = false;
 
-    function tocarArquivo(src, volume = 1) {
+    function tocar(audio, volume = 1) {
+      if (!audio) return;
       try {
-        const audio = new Audio(src);
-        audio.preload = 'auto';
+        audio.pause();
+        audio.currentTime = 0;
         audio.volume = volume;
-        const tentativa = audio.play();
-        if (tentativa && typeof tentativa.catch === 'function') {
-          tentativa.catch(() => {});
+        const promessa = audio.play();
+        if (promessa && typeof promessa.catch === 'function') {
+          promessa.catch(() => {});
         }
       } catch (e) {}
     }
 
-    function liberarAudio() {
-      if (audioLiberado) return;
-      audioLiberado = true;
+    function tocarEntrada() {
+      if (entradaTocada) return;
+      entradaTocada = true;
+      tocar(somEntrada, 0.7);
+    }
 
-      if (!somEntradaJaTocou) {
-        somEntradaJaTocou = true;
-        tocarArquivo(ARQUIVOS_AUDIO.entrada, 0.7);
+    function liberarAudio() {
+      if (!audioLiberado) {
+        audioLiberado = true;
       }
+      tocarEntrada();
     }
 
     window.addEventListener('load', () => {
       setTimeout(() => {
-        if (!audioLiberado && !somEntradaJaTocou) {
-          tocarArquivo(ARQUIVOS_AUDIO.entrada, 0.7);
-        }
-      }, 250);
+        tocarEntrada();
+      }, 180);
     });
 
     document.addEventListener('pointerdown', liberarAudio, { once: true });
     document.addEventListener('touchstart', liberarAudio, { once: true, passive: true });
+    document.addEventListener('mousemove', liberarAudio, { once: true });
     document.addEventListener('keydown', liberarAudio, { once: true });
 
     links.forEach(link => {
       link.addEventListener('mouseenter', () => {
         if (audioLiberado) {
-          tocarArquivo(ARQUIVOS_AUDIO.hover, 0.35);
+          tocar(somHover, 0.35);
         }
       });
 
       link.addEventListener('pointerdown', () => {
-        tocarArquivo(ARQUIVOS_AUDIO.clique, 0.55);
+        tocar(somClique, 0.55);
       });
 
       link.addEventListener('touchstart', () => {
-        tocarArquivo(ARQUIVOS_AUDIO.clique, 0.55);
+        tocar(somClique, 0.55);
       }, { passive: true });
     });
   </script>
