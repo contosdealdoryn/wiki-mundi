@@ -412,46 +412,6 @@
     function tocarEntrada() {
       if (entradaTocada) return;
       entradaTocada = true;
-      tocarBase(somEntradaBase, 0.7);
-    }
-
-    function liberarAudioETocarEntrada() {
-      audioLiberado = true;
-      tocarEntrada();
-    }
-
-    // Tenta tocar na primeira interação real permitida pelo navegador.
-    ['pointerdown', 'touchstart', 'mousedown', 'keydown', 'mousemove'].forEach(evento => {
-      document.addEventListener(evento, liberarAudioETocarEntrada, { once: true, passive: true });
-    });
-
-    // Garante que, ao voltar para a página, o sistema continue responsivo.
-    window.addEventListener('pageshow', () => {
-      audioLiberado = true;
-    });
-
-    links.forEach(link => {
-      link.addEventListener('mouseenter', () => {
-        if (audioLiberado) {
-          tocarClone(somHoverBase, 0.35);
-        }
-      });
-
-      link.addEventListener('pointerdown', () => {
-        audioLiberado = true;
-        tocarClone(somCliqueBase, 0.55);
-      });
-
-      link.addEventListener('click', () => {
-        audioLiberado = true;
-        tocarClone(somCliqueBase, 0.55);
-      });
-
-      link.addEventListener('touchstart', () => {
-        audioLiberado = true;
-        tocarClone(somCliqueBase, 0.55);
-      }, { passive: true });
-    });
-  </script>
+      toca
 </body>
 </html>
