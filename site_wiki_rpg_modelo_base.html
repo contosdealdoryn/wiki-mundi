@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wiki RPG</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .left {
+      flex: 1;
+      border: 3px dashed #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fff;
+    }
+
+    .left img {
+      max-height: 90%;
+      max-width: 90%;
+    }
+
+    .right {
+      width: 350px;
+      border: 3px dashed #000;
+      padding: 20px;
+      background: #fff;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .menu a {
+      text-decoration: none;
+      border: 2px solid #333;
+      padding: 10px;
+      color: #000;
+      background: #eaeaea;
+      text-align: center;
+      transition: 0.2s;
+    }
+
+    .menu a:hover {
+      background: #333;
+      color: #fff;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- ESQUERDA (PERSONAGEM) -->
+    <div class="left">
+      <img src="personagem.png" alt="Personagem">
+    </div>
+
+    <!-- DIREITA (MENU / LINKS) -->
+    <div class="right">
+      <div class="title">RAGARDO</div>
+
+      <div class="menu">
+        <a href="#">Nacionalidade</a>
+        <a href="#">Cidade</a>
+        <a href="#">Raça</a>
+        <a href="#">Elemento</a>
+        <a href="#">Ocupação</a>
+        <a href="#">Arma</a>
+        <a href="#">Relíquia</a>
+        <a href="#">Dom</a>
+        <a href="#">Maldição</a>
+        <a href="#">Espírito Guardião</a>
+        <a href="#">Explosão</a>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
