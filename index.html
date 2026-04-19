@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wiki RPG</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
@@ -27,13 +26,12 @@
     .left {
       flex: 1;
       min-width: 0;
-      border: 3px solid #c9a44c;
-      border-radius: 22px;
       position: relative;
       overflow: hidden;
+      border: 3px solid #c9a44c;
+      border-radius: 22px;
       box-shadow: 0 0 20px rgba(201,164,76,0.3);
       background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url('fundo.png') center/cover no-repeat;
-      min-height: 100%;
     }
 
     .left::before {
@@ -53,9 +51,9 @@
       width: auto;
       z-index: 2;
       object-fit: contain;
-      filter: drop-shadow(0 0 12px rgba(0,0,0,0.75));
       image-rendering: auto;
       transform: translateZ(0);
+      filter: drop-shadow(0 0 12px rgba(0,0,0,0.75));
     }
 
     .left img.char {
@@ -66,9 +64,9 @@
       width: auto;
       z-index: 4;
       object-fit: contain;
-      filter: drop-shadow(0 0 18px rgba(0,0,0,0.9));
       image-rendering: auto;
       transform: translateZ(0);
+      filter: drop-shadow(0 0 18px rgba(0,0,0,0.9));
     }
 
     .left-effects {
@@ -101,13 +99,13 @@
     .right {
       flex: 0 0 420px;
       width: 420px;
+      position: relative;
       border: 3px solid #c9a44c;
       border-radius: 22px;
       padding: 28px;
       background: linear-gradient(145deg, #111, #1c1c1c);
       box-shadow: 0 0 20px rgba(201,164,76,0.3);
       box-sizing: border-box;
-      min-height: 100%;
     }
 
     .title {
@@ -213,8 +211,8 @@
       .right {
         width: 100%;
         max-width: 100%;
-        padding: 34px 24px 40px;
-        border-radius: 24px;
+        padding: 36px 20px 42px;
+        border-radius: 30px;
       }
 
       .title {
@@ -265,7 +263,6 @@
 </head>
 <body>
   <div class="container">
-
     <div class="left">
       <img class="mid" src="ragardo_mid.png" alt="Arte complementar">
       <div class="left-effects"></div>
@@ -298,7 +295,7 @@
 
         <div class="row">
           <div class="label">Ocupação</div>
-          <div class="value"><a href="ocupacao.html">General Ordem & Equilíbrio</a></div>
+          <div class="value"><a href="ocupacao.html">General Ordem &amp; Equilíbrio</a></div>
         </div>
 
         <div class="row">
@@ -337,189 +334,6 @@
         </div>
       </div>
     </div>
-
-  </div>
-</body>
-</html>
-      }
-
-      .right .info {
-        position: relative;
-        z-index: 2;
-      }
-
-      .right::before {
-        content: '';
-        position: absolute;
-        top: 12px;
-        left: 12px;
-        right: 12px;
-        bottom: 12px;
-        border-radius: 20px;
-        z-index: 1;
-        pointer-events: none;
-      }
-    }
-
-    @keyframes particlesFloat {
-      from {
-        transform: translateY(0px) translateX(0px);
-      }
-      50% {
-        transform: translateY(-8px) translateX(6px);
-      }
-      to {
-        transform: translateY(-16px) translateX(-4px);
-      }
-    }
-  
-
-    /* RESPONSIVO MOBILE */
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-        align-items: center;
-        padding: 18px;
-        gap: 18px;
-      }
-
-      .left {
-        width: 100%;
-        height: 380px;
-        min-height: 380px;
-      }
-
-      .right {
-        width: 100%;
-        max-width: 100%;
-        padding: 26px 18px 34px;
-        border-radius: 24px;
-      }
-
-      .title {
-        font-size: 28px;
-        margin-bottom: 18px;
-      }
-
-      .info {
-        gap: 8px;
-      }
-
-      .row {
-        display: flex;
-        gap: 8px;
-        width: 100%;
-      }
-
-      .label {
-        width: calc(42% - 4px);
-        min-width: 0;
-        max-width: none;
-        padding: 10px 6px;
-        font-size: 11px;
-      }
-
-      .value {
-        width: calc(58% - 4px);
-        min-width: 0;
-        max-width: none;
-      }
-
-      .value a {
-        padding: 10px 6px;
-        font-size: 11px;
-        word-break: break-word;
-        overflow-wrap: anywhere;
-      }
-
-      .left img.mid {
-        left: -70px;
-        height: 106%;
-      }
-
-      .left img.char {
-        right: -8px;
-        height: 98%;
-      }
-    }
-
-</style>
-</head>
-<body>
-  <div class="container">
-
-    <div class="left">
-      <img class="mid" src="ragardo_mid.png" alt="Arte complementar">
-      <div class="left-effects"></div>
-      <img class="char" src="ragardo_png.png" alt="Ragardo">
-    </div>
-
-    <div class="right">
-      <div class="title">RAGARDO</div>
-
-      <div class="info">
-        <div class="row">
-          <div class="label">Nacionalidade</div>
-          <div class="value"><a href="nacionalidade.html">Montes Wesland</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Cidade</div>
-          <div class="value"><a href="cidade.html">Reginforte</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Raça</div>
-          <div class="value"><a href="raca.html">Míscere-Dragão</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Elemental</div>
-          <div class="value"><a href="elemento.html">Glacial</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Ocupação</div>
-          <div class="value"><a href="ocupacao.html">General Ordem & Equilíbrio</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label vazio"></div>
-          <div class="value"><a href="ocup_guardareal.html">General da Guarda Real</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Arma</div>
-          <div class="value"><a href="arma.html">Dragonslasher</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Relíquia</div>
-          <div class="value"><a href="reliquia.html">Safira de Iglis</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Dom</div>
-          <div class="value"><a href="dom.html">Mutação do Kaiser</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Maldição</div>
-          <div class="value"><a href="maldicao.html">N/A</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Espírito Guardião</div>
-          <div class="value"><a href="espirito.html">N/A</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Explosão</div>
-          <div class="value"><a href="explosao.html">Sequência do Kaiser</a></div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </body>
 </html>
