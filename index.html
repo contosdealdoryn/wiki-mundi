@@ -32,9 +32,11 @@
     }
 
     .logo-wrap img {
-      display: inline-block;
-      max-width: min(560px, 92%);
+      display: block;
+      width: 100%;
+      max-width: 100%;
       height: auto;
+      margin: 0 auto;
     }
 
     .music-button-wrap {
@@ -422,19 +424,19 @@
           ultimoHover = agora;
           tocarClone(hoverBase, 0.35);
         });
-
-        el.addEventListener('click', (ev) => {
-          if (el === musicButton) return;
-          if (!audioAtivado) return;
-          if (ev.defaultPrevented) return;
-          tocarClone(clickBase, 0.55);
-        });
-
-        el.addEventListener('touchstart', () => {
-          if (!audioAtivado) return;
-          tocarClone(clickBase, 0.55);
-        }, { passive: true });
       });
+
+      document.addEventListener('click', (ev) => {
+        if (ev.target === musicButton) return;
+        if (!audioAtivado) return;
+        tocarClone(clickBase, 0.55);
+      });
+
+      document.addEventListener('touchstart', (ev) => {
+        if (ev.target === musicButton) return;
+        if (!audioAtivado) return;
+        tocarClone(clickBase, 0.55);
+      }, { passive: true });
     })();
   </script>
 </body>
