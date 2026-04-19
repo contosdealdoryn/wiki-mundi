@@ -380,20 +380,17 @@
     const somEntradaBase = document.getElementById('somEntradaBase');
     const somCliqueBase = document.getElementById('somCliqueBase');
 
-    let audioLiberado = false;
     let entradaTocada = false;
 
-    function tocarBase(audio, volume = 1) {
+    function tocar(audio, volume = 1) {
       if (!audio) return;
       try {
         audio.pause();
         audio.currentTime = 0;
         audio.volume = volume;
-        const promessa = audio.play();
-        if (promessa && typeof promessa.catch === 'function') {
-          promessa.catch(() => {});
-        }
-      } catch (e) {}
+        const p = audio.play();
+        if (p && p.catch) p.catch(()=>{});
+      } catch(e){}
     }
 
     function tocarClone(audio, volume = 1) {
@@ -401,64 +398,22 @@
       try {
         const clone = audio.cloneNode(true);
         clone.volume = volume;
-        clone.currentTime = 0;
-        const promessa = clone.play();
-        if (promessa && typeof promessa.catch === 'function') {
-          promessa.catch(() => {});
-        }
-      } catch (e) {}
+        const p = clone.play();
+        if (p && p.catch) p.catch(()=>{});
+      } catch(e){}
     }
 
-    function liberarAudio() {
-      audioLiberado = true;
-    }
-
-    function tocarEntradaUmaVez() {
+    function tocarEntrada() {
       if (entradaTocada) return;
       entradaTocada = true;
-      tocarBase(somEntradaBase, 0.7);
+      tocar(somEntradaBase, 0.7);
     }
 
-    function iniciarDesktop() {
-      liberarAudio();
-      tocarEntradaUmaVez();
-    }
+    // DESKTOP: tenta pelo movimento do mouse
+    document.addEventListener('mousemove', () => {
+      tocarEntrada();
+    }, { once: true });
 
-    function iniciarMobile() {
-      liberarAudio();
-      tocarEntradaUmaVez();
-    }
-
-    // Desktop: toca quando o mouse mexe pela primeira vez
-    document.addEventListener('mousemove', iniciarDesktop, { once: true });
-
-    // Mobile: toca no primeiro toque
-    document.addEventListener('touchstart', iniciarMobile, { once: true, passive: true });
-
-    // Também libera ao clicar, caso o navegador exija interação mais forte
-    document.addEventListener('pointerdown', liberarAudio, { once: true });
-
-    window.addEventListener('pageshow', () => {
-      audioLiberado = true;
-    });
-
-    links.forEach(link => {
-      link.addEventListener('mouseenter', () => {
-        if (audioLiberado) {
-          tocarClone(somHoverBase, 0.35);
-        }
-      });
-
-      link.addEventListener('pointerdown', () => {
-        liberarAudio();
-        tocarClone(somCliqueBase, 0.55);
-      });
-
-      link.addEventListener('touchstart', () => {
-        liberarAudio();
-        tocarClone(somCliqueBase, 0.55);
-      }, { passive: true });
-    });
-  </script>
+    // FAL
 </body>
 </html>
