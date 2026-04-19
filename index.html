@@ -510,7 +510,9 @@
       }
 
       if (overlay) {
+        overlay.addEventListener("pointermove", primeiraInteracao, { passive: false });
         overlay.addEventListener("click", primeiraInteracao, { passive: false });
+        overlay.addEventListener("touchstart", primeiraInteracao, { passive: false });
         overlay.addEventListener("touchend", primeiraInteracao, { passive: false });
 
         overlay.addEventListener("keydown", (ev) => {
