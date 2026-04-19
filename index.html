@@ -45,8 +45,8 @@
       z-index: 2;
       object-fit: contain;
       filter: drop-shadow(0 0 12px rgba(0,0,0,0.75));
-      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 42%, rgba(0,0,0,0.92) 56%, rgba(0,0,0,0.72) 68%, rgba(0,0,0,0.38) 80%, transparent 100%);
-      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 42%, rgba(0,0,0,0.92) 56%, rgba(0,0,0,0.72) 68%, rgba(0,0,0,0.38) 80%, transparent 100%);
+      image-rendering: auto;
+      transform: translateZ(0);
     }
 
     .left img.char {
@@ -58,8 +58,17 @@
       z-index: 4;
       object-fit: contain;
       filter: drop-shadow(0 0 18px rgba(0,0,0,0.9));
-      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.94) 54%, rgba(0,0,0,0.74) 67%, rgba(0,0,0,0.40) 80%, transparent 100%);
-      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.94) 54%, rgba(0,0,0,0.74) 67%, rgba(0,0,0,0.40) 80%, transparent 100%);
+      image-rendering: auto;
+      transform: translateZ(0);
+    }
+
+    .left::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      box-shadow: inset 0 0 22px rgba(0,0,0,0.28), inset 0 0 38px rgba(255,255,255,0.03);
     }
 
     .left-effects {
@@ -93,8 +102,8 @@
       flex: 0 0 420px;
       width: 420px;
       border: 3px solid #c9a44c;
-      border-radius: 10px;
-      padding: 20px;
+      border-radius: 22px;
+      padding: 28px;
       background: linear-gradient(145deg, #111, #1c1c1c);
       box-shadow: 0 0 20px rgba(201,164,76,0.3);
       box-sizing: border-box;
@@ -204,7 +213,8 @@
       .right {
         width: 100%;
         max-width: 100%;
-        padding: 14px;
+        padding: 26px 26px 34px;
+        border-radius: 24px;
       }
 
       .title {
