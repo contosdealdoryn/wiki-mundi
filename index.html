@@ -17,7 +17,7 @@
 
     .container {
       display: flex;
-      align-items: flex-start;
+      align-items: stretch;
       gap: 30px;
       padding: 30px;
       box-sizing: border-box;
@@ -26,7 +26,6 @@
 
     .left {
       flex: 1;
-      height: 760px;
       min-width: 0;
       border: 3px solid #c9a44c;
       border-radius: 22px;
@@ -34,19 +33,20 @@
       overflow: hidden;
       box-shadow: 0 0 20px rgba(201,164,76,0.3);
       background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url('fundo.png') center/cover no-repeat;
+      min-height: 100%;
     }
 
     .left img.mid {
       position: absolute;
-      left: -20px;
+      left: -30px;
       bottom: 0;
-      height: 100%;
+      height: 104%;
       width: auto;
       z-index: 2;
       object-fit: contain;
       filter: drop-shadow(0 0 12px rgba(0,0,0,0.75));
-      -webkit-mask-image: radial-gradient(circle at center, black 70%, transparent 100%);
-      mask-image: radial-gradient(circle at center, black 70%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 42%, rgba(0,0,0,0.92) 56%, rgba(0,0,0,0.72) 68%, rgba(0,0,0,0.38) 80%, transparent 100%);
+      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 42%, rgba(0,0,0,0.92) 56%, rgba(0,0,0,0.72) 68%, rgba(0,0,0,0.38) 80%, transparent 100%);
     }
 
     .left img.char {
@@ -58,8 +58,8 @@
       z-index: 4;
       object-fit: contain;
       filter: drop-shadow(0 0 18px rgba(0,0,0,0.9));
-      -webkit-mask-image: radial-gradient(circle at center, black 70%, transparent 100%);
-      mask-image: radial-gradient(circle at center, black 70%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.94) 54%, rgba(0,0,0,0.74) 67%, rgba(0,0,0,0.40) 80%, transparent 100%);
+      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.94) 54%, rgba(0,0,0,0.74) 67%, rgba(0,0,0,0.40) 80%, transparent 100%);
     }
 
     .left-effects {
@@ -98,6 +98,7 @@
       background: linear-gradient(145deg, #111, #1c1c1c);
       box-shadow: 0 0 20px rgba(201,164,76,0.3);
       box-sizing: border-box;
+      min-height: 100%;
     }
 
     .title {
