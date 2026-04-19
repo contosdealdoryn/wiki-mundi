@@ -5,67 +5,97 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wiki RPG</title>
 
+  <!-- Fonte estilo RPG -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      font-family: 'Cinzel', serif;
+      background: radial-gradient(circle at center, #1a1a1a, #0d0d0d);
+      color: #e6d3a3;
     }
 
     .container {
       display: flex;
       height: 100vh;
-      padding: 20px;
-      gap: 20px;
+      padding: 30px;
+      gap: 30px;
     }
 
     .left {
       flex: 1;
-      border: 3px dashed #000;
+      border: 3px solid #c9a44c;
+      border-radius: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #fff;
+      background: linear-gradient(145deg, #111, #1c1c1c);
+      box-shadow: 0 0 20px rgba(201,164,76,0.3);
     }
 
     .left img {
-      max-height: 90%;
-      max-width: 90%;
+      max-height: 95%;
+      max-width: 95%;
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.8));
     }
 
     .right {
-      width: 350px;
-      border: 3px dashed #000;
+      width: 360px;
+      border: 3px solid #c9a44c;
+      border-radius: 10px;
       padding: 20px;
-      background: #fff;
+      background: linear-gradient(145deg, #111, #1c1c1c);
+      box-shadow: 0 0 20px rgba(201,164,76,0.3);
     }
 
     .title {
       text-align: center;
-      font-size: 32px;
-      margin-bottom: 20px;
+      font-size: 36px;
+      margin-bottom: 25px;
       font-weight: bold;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(201,164,76,0.7);
     }
 
     .menu {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
 
     .menu a {
       text-decoration: none;
-      border: 2px solid #333;
-      padding: 10px;
-      color: #000;
-      background: #eaeaea;
+      border: 2px solid #c9a44c;
+      padding: 12px;
+      color: #e6d3a3;
+      background: linear-gradient(145deg, #1a1a1a, #111);
       text-align: center;
-      transition: 0.2s;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .menu a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,215,100,0.3), transparent);
+      transition: 0.5s;
+    }
+
+    .menu a:hover::before {
+      left: 100%;
     }
 
     .menu a:hover {
-      background: #333;
-      color: #fff;
+      background: #c9a44c;
+      color: #111;
+      box-shadow: 0 0 10px #c9a44c;
+      transform: scale(1.03);
     }
 
   </style>
@@ -84,17 +114,17 @@
       <div class="title">RAGARDO</div>
 
       <div class="menu">
-        <a href="#">Nacionalidade</a>
-        <a href="#">Cidade</a>
-        <a href="#">Raça</a>
-        <a href="#">Elemento</a>
-        <a href="#">Ocupação</a>
-        <a href="#">Arma</a>
-        <a href="#">Relíquia</a>
-        <a href="#">Dom</a>
-        <a href="#">Maldição</a>
-        <a href="#">Espírito Guardião</a>
-        <a href="#">Explosão</a>
+        <a href="nacionalidade.html">Nacionalidade</a>
+        <a href="cidade.html">Cidade</a>
+        <a href="raca.html">Raça</a>
+        <a href="elemento.html">Elemento</a>
+        <a href="ocupacao.html">Ocupação</a>
+        <a href="arma.html">Arma</a>
+        <a href="reliquia.html">Relíquia</a>
+        <a href="dom.html">Dom</a>
+        <a href="maldicao.html">Maldição</a>
+        <a href="espirito.html">Espírito Guardião</a>
+        <a href="explosao.html">Explosão</a>
       </div>
 
     </div>
