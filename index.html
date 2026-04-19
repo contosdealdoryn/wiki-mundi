@@ -33,8 +33,7 @@
     }
 
     .snow-layer,
-    .sparkle-layer,
-    .star-layer {
+    .sparkle-layer {
       position: fixed;
       inset: 0;
       pointer-events: none;
@@ -45,14 +44,14 @@
     .snow-layer::before,
     .snow-layer::after,
     .sparkle-layer::before,
-    .sparkle-layer::after,
-    .star-layer::before,
-    .star-layer::after {
-      content: '';
-      position: absolute;
-      inset: -20% 0 0 0;
-      background-repeat: repeat;
-      will-change: transform, opacity;
+    .sparkle-layer::after {
+      opacity: 0.15;
+      background-image:
+        radial-gradient(circle, rgba(200,230,255,0.5) 0 1.2px, transparent 2px),
+        radial-gradient(circle, rgba(160, 215, 255, 0.45) 0 1.8px, transparent 2.8px);
+      background-size: 300px 300px, 440px 440px;
+      background-position: 120px 40px, 40px 180px;
+      animation: sparkleFallWide 22s linear infinite;
     }
 
     .snow-layer::before {
@@ -77,68 +76,24 @@
     }
 
     .sparkle-layer::before {
-      opacity: 0.45;
+      opacity: 0.35;
       background-image:
-        radial-gradient(circle, rgba(175, 225, 255, 1) 0 1.8px, transparent 2.8px),
-        radial-gradient(circle, rgba(255,255,255,0.95) 0 1.1px, transparent 2px),
-        radial-gradient(circle, rgba(140, 210, 255, 0.78) 0 2.2px, transparent 3px);
+        radial-gradient(circle, rgba(175, 225, 255, 0.6) 0 1.6px, transparent 2.6px),
+        radial-gradient(circle, rgba(200,230,255,0.5) 0 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(140, 210, 255, 0.5) 0 2px, transparent 3px);
       background-size: 220px 220px, 280px 280px, 340px 340px;
       background-position: 20px 80px, 140px 20px, 90px 150px;
       animation: sparkleFall 14s linear infinite;
     }
 
     .sparkle-layer::after {
-      opacity: 0.22;
+      opacity: 0.25;
       background-image:
         radial-gradient(circle, rgba(255,255,255,0.95) 0 1.4px, transparent 2.4px),
         radial-gradient(circle, rgba(160, 215, 255, 0.85) 0 2px, transparent 3px);
       background-size: 300px 300px, 440px 440px;
       background-position: 120px 40px, 40px 180px;
       animation: sparkleFallWide 22s linear infinite;
-    }
-
-    /* Estrelas mágicas com brilho pulsando */
-    .star-layer::before {
-      opacity: 0.38;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,1) 0 1.2px, transparent 2px),
-        linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)),
-        linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0.9)),
-        radial-gradient(circle, rgba(160,220,255,0.85) 0 1.6px, transparent 2.3px),
-        linear-gradient(rgba(160,220,255,0.7), rgba(160,220,255,0.7)),
-        linear-gradient(90deg, rgba(160,220,255,0.7), rgba(160,220,255,0.7));
-      background-size:
-        260px 260px,
-        8px 28px,
-        28px 8px,
-        340px 340px,
-        10px 36px,
-        36px 10px;
-      background-position:
-        40px 80px,
-        180px 120px,
-        170px 130px,
-        220px 30px,
-        320px 210px,
-        307px 223px;
-      animation: starTwinkle 6s ease-in-out infinite alternate;
-    }
-
-    .star-layer::after {
-      opacity: 0.22;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,0.95) 0 1px, transparent 1.8px),
-        linear-gradient(rgba(210,240,255,0.7), rgba(210,240,255,0.7)),
-        linear-gradient(90deg, rgba(210,240,255,0.7), rgba(210,240,255,0.7));
-      background-size:
-        420px 420px,
-        7px 22px,
-        22px 7px;
-      background-position:
-        120px 40px,
-        80px 260px,
-        72px 267px;
-      animation: starTwinkleSoft 9s ease-in-out infinite alternate;
     }
 
     .logo-wrap {
@@ -170,13 +125,13 @@
       font-size: 1rem;
       cursor: pointer;
       transition: 0.24s ease;
-      box-shadow: 0 0 16px rgba(127, 209, 255, 0.20);
+      box-shadow: 0 0 16px rgba(127, 209, 255, 0.25);
     }
 
     .music-button:hover {
       background: linear-gradient(145deg, #7fd1ff, #aee4ff);
       color: #111;
-      box-shadow: 0 0 16px rgba(127, 209, 255, 0.35);
+      box-shadow: 0 0 16px rgba(127, 209, 255, 0.25);
     }
 
     .menu-panel {
@@ -184,7 +139,7 @@
       border: 3px solid #7fd1ff;
       border-radius: 24px;
       background: linear-gradient(145deg, rgba(17,17,17,0.96), rgba(29,29,34,0.96));
-      box-shadow: 0 0 24px rgba(127, 209, 255, 0.20);
+      box-shadow: 0 0 24px rgba(127, 209, 255, 0.25);
       padding: 22px;
     }
 
@@ -193,7 +148,7 @@
       font-size: 1.7rem;
       margin: 0 0 18px;
       letter-spacing: 1px;
-      text-shadow: 0 0 10px rgba(127, 209, 255, 0.35);
+      text-shadow: 0 0 10px rgba(127, 209, 255, 0.25);
     }
 
     .top-level {
@@ -204,16 +159,16 @@
     }
 
     details.menu-group {
-      border: 2px solid rgba(127, 209, 255, 0.85);
+      border: 2px solid rgba(127, 209, 255, 0.25);
       border-radius: 18px;
       background: linear-gradient(145deg, #151515, #101014);
       overflow: hidden;
       min-height: 64px;
-      box-shadow: 0 0 14px rgba(127, 209, 255, 0.12);
+      box-shadow: 0 0 14px rgba(127, 209, 255, 0.25);
     }
 
     details.menu-group[open] {
-      box-shadow: 0 0 16px rgba(150, 205, 255, 0.16), 0 0 14px rgba(127, 209, 255, 0.14);
+      box-shadow: 0 0 16px rgba(150, 205, 255, 0.16), 0 0 14px rgba(127, 209, 255, 0.25);
     }
 
     summary.menu-button {
@@ -252,7 +207,7 @@
       flex-direction: column;
       gap: 8px;
       padding: 12px;
-      border-top: 1px solid rgba(127, 209, 255, 0.28);
+      border-top: 1px solid rgba(127, 209, 255, 0.25);
       background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
     }
 
@@ -260,7 +215,7 @@
       display: block;
       text-decoration: none;
       color: #cfeeff;
-      border: 1px solid rgba(127, 209, 255, 0.70);
+      border: 1px solid rgba(127, 209, 255, 0.25);
       border-radius: 12px;
       padding: 10px 12px;
       background: linear-gradient(145deg, #19191b, #111114);
@@ -272,7 +227,7 @@
     .menu-link:hover {
       background: #7fd1ff;
       color: #111;
-      box-shadow: 0 0 10px rgba(127, 209, 255, 0.30);
+      box-shadow: 0 0 10px rgba(127, 209, 255, 0.25);
       transform: translateY(-1px);
     }
 
@@ -303,7 +258,7 @@
 
     .welcome-box {
       margin-top: 22px;
-      border: 2px solid rgba(127, 209, 255, 0.55);
+      border: 2px solid rgba(127, 209, 255, 0.25);
       border-radius: 18px;
       padding: 18px 20px;
       background: linear-gradient(145deg, rgba(20,20,24,0.92), rgba(11,11,15,0.92));
@@ -344,19 +299,6 @@
       100% { transform: translateY(112%) translateX(-42px); opacity: 0.12; }
     }
 
-    @keyframes starTwinkle {
-      0% { opacity: 0.18; transform: translateY(0) scale(0.98); }
-      30% { opacity: 0.42; }
-      60% { opacity: 0.28; transform: translateY(8px) scale(1.02); }
-      100% { opacity: 0.52; transform: translateY(-6px) scale(1.05); }
-    }
-
-    @keyframes starTwinkleSoft {
-      0% { opacity: 0.08; transform: scale(0.95); }
-      50% { opacity: 0.24; transform: scale(1.03); }
-      100% { opacity: 0.14; transform: scale(1); }
-    }
-
     @media (max-width: 1180px) {
       .top-level {
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -375,67 +317,21 @@
 
       .music-button {
         width: min(100%, 520px);
-        font-size: 0.86rem;
-        padding: 10px 14px;
-        border-radius: 14px;
+        font-size: 0.95rem;
       }
 
       .menu-panel {
-        padding: 12px;
-        border-radius: 18px;
-      }
-
-      .menu-title {
-        font-size: 1.2rem;
-        margin-bottom: 12px;
+        padding: 16px;
+        border-radius: 20px;
       }
 
       .top-level {
         grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
-      details.menu-group {
-        border-radius: 14px;
-        min-height: 46px;
       }
 
       summary.menu-button {
-        min-height: 46px;
-        padding: 10px 10px;
-        font-size: 0.82rem;
-        letter-spacing: 0.2px;
-      }
-
-      .submenu,
-      .subsubmenu {
-        gap: 6px;
-        padding: 8px;
-      }
-
-      .menu-link {
-        padding: 7px 8px;
-        font-size: 0.78rem;
-        border-radius: 9px;
-      }
-
-      summary.nested-button {
-        padding: 8px 8px;
-        font-size: 0.76rem;
-      }
-
-      .welcome-box {
-        margin-top: 14px;
-        padding: 12px 12px;
-      }
-
-      .welcome-box h2 {
-        font-size: 1rem;
-      }
-
-      .welcome-box p {
-        font-size: 0.82rem;
-        line-height: 1.5;
+        min-height: 58px;
+        font-size: 0.95rem;
       }
     }
   </style>
@@ -443,15 +339,13 @@
 <body>
   <div class="snow-layer"></div>
   <div class="sparkle-layer"></div>
-  <div class="star-layer"></div>
-
   <main class="page">
     <div class="logo-wrap">
       <img src="banner_principal.png" alt="Aldoryn">
     </div>
 
     <div class="music-button-wrap">
-      <button id="musicButton" class="music-button">(BGM) Seja bem vindo ao fantástico mundo mágico de Aldoryn...</button>
+      <button id="musicButton" class="music-button">PLAY</button>
     </div>
 
     <section class="menu-panel">
@@ -583,6 +477,17 @@
 
       let audioAtivado = false;
       let ultimoHover = 0;
+
+      function tocarBase(audio, volume = 1) {
+        if (!audio) return;
+        try {
+          audio.pause();
+          audio.currentTime = 0;
+          audio.volume = volume;
+          const p = audio.play();
+          if (p && typeof p.catch === 'function') p.catch(() => {});
+        } catch (e) {}
+      }
 
       function tocarClone(audio, volume = 1) {
         if (!audio) return;
