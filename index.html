@@ -122,12 +122,14 @@
       flex-direction: column;
       gap: 10px;
       width: 100%;
+      align-items: center; /* centraliza no desktop */
     }
 
     .row {
       display: flex;
       gap: 10px;
-      width: 100%;
+      width: auto; /* não ocupa tudo, permite centralizar */
+      justify-content: center;
     }
 
     .label {
