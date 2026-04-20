@@ -602,26 +602,45 @@
         tocarClone(audioClick, 0.55);
       }, { passive: true });
 
-      // Estado inicial
-      ragardoChar.classList.add("front");
-      ragardoMid.classList.add("back");
-
-      ragardoMid.addEventListener("click", (ev) => {
-        ev.stopPropagation();
+      function trazerMidPraFrente() {
         ragardoMid.classList.add("front");
         ragardoMid.classList.remove("back");
 
         ragardoChar.classList.add("back");
         ragardoChar.classList.remove("front");
-      });
+      }
 
-      ragardoChar.addEventListener("click", (ev) => {
-        ev.stopPropagation();
+      function trazerCharPraFrente() {
         ragardoChar.classList.add("front");
         ragardoChar.classList.remove("back");
 
         ragardoMid.classList.add("back");
         ragardoMid.classList.remove("front");
+      }
+
+      // Estado inicial
+      trazerCharPraFrente();
+
+      ragardoMid.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+
+        if (audioAtivado) {
+          tocarClone(audioChar, 0.7);
+        }
+
+        if (ragardoMid.classList.contains("front")) {
+          trazerCharPraFrente();
+        } else {
+          trazerMidPraFrente();
+        }
+      });
+
+      ragardoChar.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+
+        if (!ragardoChar.classList.contains("front")) {
+          trazerCharPraFrente();
+        }
       });
     })();
   </script>
