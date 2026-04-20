@@ -35,7 +35,7 @@
       border: 3px solid #556b2f;
       border-radius: 22px;
       box-shadow: 0 0 20px rgba(85, 107, 47, 0.28);
-      background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url('fundo2.png') center/cover no-repeat;
+      background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url('fundo1.png') center/cover no-repeat;
     }
 
     .left::before {
@@ -133,71 +133,62 @@
       background: linear-gradient(145deg, #111, #1c1c1c);
       box-shadow: 0 0 20px rgba(85, 107, 47, 0.28);
       box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .title {
       text-align: center;
       font-size: 36px;
-      margin-bottom: 25px;
+      margin-bottom: 18px;
       font-weight: bold;
       letter-spacing: 2px;
-      text-shadow: 0 0 10px rgba(85, 107, 47, 0.38);
+      text-shadow: 0 0 10px rgba(85, 107, 47, 0.28);
     }
 
-    .info {
+    .bio-text {
+      width: 100%;
+      text-align: center;
+      color: #dbe8c8;
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .menu-links {
+      width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      width: 100%;
       align-items: center;
+      gap: 12px;
     }
 
-    .row {
-      display: flex;
-      gap: 10px;
-      width: auto;
-      justify-content: center;
-    }
-
-    .label {
-      width: 150px;
-      min-width: 150px;
-      max-width: 150px;
-      border: 2px solid #556b2f;
-      padding: 10px;
-      background: #111;
-      text-align: center;
-      box-sizing: border-box;
-    }
-
-    .label.vazio {
-      visibility: hidden;
-    }
-
-    .value {
-      width: 220px;
-      min-width: 220px;
-      max-width: 220px;
-    }
-
-    .value a {
+    .menu-links a {
       display: block;
       width: 100%;
+      max-width: 300px;
       text-decoration: none;
       border: 2px solid #556b2f;
-      padding: 10px;
+      padding: 12px 14px;
       color: #dbe8c8;
       background: linear-gradient(145deg, #1a1a1a, #111);
       text-align: center;
       transition: 0.25s;
       box-sizing: border-box;
+      border-radius: 10px;
     }
 
-    .value a:hover {
+    .menu-links a:hover {
       background: #556b2f;
       color: #111;
       box-shadow: 0 0 10px #556b2f;
       transform: scale(1.03);
+    }
+
+    .menu-links a.voltar {
+      margin-top: 10px;
+      font-weight: bold;
     }
 
     @keyframes entrarMid {
@@ -267,15 +258,6 @@
     }
 
     @media (max-width: 768px) {
-      .info {
-        align-items: stretch;
-      }
-
-      .row {
-        width: 100%;
-        justify-content: flex-start;
-      }
-
       .container {
         flex-direction: column;
         align-items: center;
@@ -301,31 +283,20 @@
         margin-bottom: 18px;
       }
 
-      .info {
-        gap: 8px;
+      .bio-text {
+        font-size: 13px;
+        line-height: 1.65;
+        margin-bottom: 20px;
       }
 
-      .row {
-        gap: 8px;
+      .menu-links {
+        gap: 10px;
       }
 
-      .label {
-        width: calc(42% - 4px);
-        min-width: 0;
-        max-width: none;
-        padding: 10px 6px;
-        font-size: 11px;
-      }
-
-      .value {
-        width: calc(58% - 4px);
-        min-width: 0;
-        max-width: none;
-      }
-
-      .value a {
-        padding: 10px 6px;
-        font-size: 11px;
+      .menu-links a {
+        max-width: 100%;
+        padding: 12px 10px;
+        font-size: 13px;
         word-break: break-word;
         overflow-wrap: anywhere;
       }
@@ -380,61 +351,18 @@
     <div class="right">
       <div class="title">NYTA</div>
 
-      <div class="info">
-        <div class="row">
-          <div class="label">Nacionalidade</div>
-          <div class="value"><a href="nacionalidade.html">Ardorya Suprus</a></div>
-        </div>
+      <div class="bio-text">
+        <em>Uma aventureira sonhadora que deixou de lado a rotina de dorminhoca sem objetivos para se atirar de cabeça numa longa jornada em busca de evolução.<br><br>Logo no início, o acaso resolveu pregar várias peças, até empurrá-la aos caminhos das pessoas mais improváveis – e a princípio, menos queridas – que ela poderia esperar. Nyta também busca o sentido de compreender o valor de “ajudar sem um preço” em prol de se tornar um símbolo mundial de paz e ordem.</em>
+      </div>
 
-        <div class="row">
-          <div class="label">Cidade</div>
-          <div class="value"><a href="cidade.html">Indranyn</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Raça</div>
-          <div class="value"><a href="raca.html">Míscere-Felino</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Elemental</div>
-          <div class="value"><a href="elemento.html">Nebulosa</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Ocupação</div>
-          <div class="value"><a href="ocupacao.html">Aventureira Prata (Início)<br>Aventureira Ouro<br>Aventureira Platina<br>Aventureira Diamante</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Arma</div>
-          <div class="value"><a href="arma.html">Arco de Vedrita<br>Vendaval da Colina<br>Arco da Centelha de Gwyl<br>Arco de Arilayn</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Relíquia</div>
-          <div class="value"><a href="reliquia.html">N/A</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Dom</div>
-          <div class="value"><a href="dom.html">Cara ou Coroa</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Maldição</div>
-          <div class="value"><a href="maldicao.html">N/A</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Espírito Guardião</div>
-          <div class="value"><a href="espirito.html">N/A</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Explosão</div>
-          <div class="value"><a href="explosao.html">Omni Disparo</a></div>
-        </div>
+      <div class="menu-links">
+        <a href="ficha-tecnica.html">Ficha Técnica</a>
+        <a href="dados-avancados.html">Dados Avançados</a>
+        <a href="magiccias-tecnicas.html">Magiccias &amp; Técnicas</a>
+        <a href="historia.html">História</a>
+        <a href="curtas-one-shots.html">Curtas (One-Shots)</a>
+        <a href="artes.html">Artes</a>
+        <a href="index.html" class="voltar">VOLTAR</a>
       </div>
     </div>
   </div>
