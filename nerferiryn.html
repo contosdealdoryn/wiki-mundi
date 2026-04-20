@@ -338,3 +338,247 @@
       width: 1px;
       height: 1px;
       padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      white-space: nowrap;
+      border: 0;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <div class="img-wrap mid-wrap front" id="nerferirynMidWrap">
+        <img class="mid" id="nerferirynMid" src="nerferiryn_mid.png" alt="Arte complementar">
+      </div>
+
+      <div class="left-effects"></div>
+
+      <div class="img-wrap char-wrap back" id="nerferirynCharWrap">
+        <img class="char" id="nerferirynChar" src="nerferiryn_png.png" alt="Nerferiryn">
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="title">NERFERIRYN</div>
+
+      <div class="bio-text">
+        <em>
+          A implacável Gran-Maga da Flama sustenta com punhos de ferro a coroa do Sol eterno, governando absoluta a nação durante os últimos 3 mil anos com astúcia, seriedade e rigor.<br><br>
+          Uma Rainha Elfa reclusa em seu palácio, regada aos luxos extremos da sua dinastia, buscando confrontar as fronteiras que separam o plano real dos outros mundos.<br><br>
+          Suas conexões superiores com o Espiritum levou a população a reverenciá-la como uma Deusa.
+        </em>
+      </div>
+
+      <div class="menu-links">
+        <a href="ficha-tecnica.html">Ficha Técnica</a>
+        <a href="dados-avancados.html">Dados Avançados</a>
+        <a href="magiccias-tecnicas.html">Magiccias &amp; Técnicas</a>
+        <a href="historia.html">História</a>
+        <a href="curtas-one-shots.html">Curtas (One-Shots)</a>
+        <a href="artes.html">Artes</a>
+        <a href="index.html" class="voltar">VOLTAR</a>
+      </div>
+    </div>
+  </div>
+
+  <button id="audio-activation-overlay" type="button" aria-label="Ativar áudio do site">
+    <span class="sr-only">Ativar áudio do site</span>
+  </button>
+
+  <audio id="audio-char" preload="auto">
+    <source src="char_aparece.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="audio-hover" preload="auto">
+    <source src="mouse_acima.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="audio-click" preload="auto">
+    <source src="clique_acima.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    (() => {
+      const overlay = document.getElementById("audio-activation-overlay");
+      const audioChar = document.getElementById("audio-char");
+      const audioHover = document.getElementById("audio-hover");
+      const audioClick = document.getElementById("audio-click");
+
+      const nerferirynMid = document.getElementById("nerferirynMid");
+      const nerferirynChar = document.getElementById("nerferirynChar");
+      const nerferirynMidWrap = document.getElementById("nerferirynMidWrap");
+      const nerferirynCharWrap = document.getElementById("nerferirynCharWrap");
+
+      let audioAtivado = false;
+      let somEntradaTocado = false;
+      let ultimoHover = 0;
+
+      function tocarBase(audio, volume = 1) {
+        if (!audio) return;
+        try {
+          audio.pause();
+          audio.currentTime = 0;
+          audio.volume = volume;
+          const p = audio.play();
+          if (p && typeof p.catch === "function") p.catch(() => {});
+        } catch (e) {}
+      }
+
+      function tocarClone(audio, volume = 1) {
+        if (!audio) return;
+        try {
+          const src =
+            audio.currentSrc ||
+            audio.getAttribute("src") ||
+            audio.querySelector("source")?.src;
+
+          if (!src) return;
+
+          const fx = new Audio(src);
+          fx.volume = volume;
+          fx.preload = "auto";
+          const p = fx.play();
+          if (p && typeof p.catch === "function") p.catch(() => {});
+        } catch (e) {}
+      }
+
+      function ativarAudio() {
+        if (audioAtivado) return;
+        audioAtivado = true;
+
+        if (!somEntradaTocado) {
+          somEntradaTocado = true;
+          tocarBase(audioChar, 0.7);
+        }
+
+        if (overlay) overlay.remove();
+      }
+
+      function linkSobPonteiro(ev) {
+        if (!overlay) return null;
+
+        const x =
+          typeof ev.clientX === "number"
+            ? ev.clientX
+            : ev.changedTouches?.[0]?.clientX;
+
+        const y =
+          typeof ev.clientY === "number"
+            ? ev.clientY
+            : ev.changedTouches?.[0]?.clientY;
+
+        if (typeof x !== "number" || typeof y !== "number") return null;
+
+        const oldPointerEvents = overlay.style.pointerEvents;
+        overlay.style.pointerEvents = "none";
+        const el = document.elementFromPoint(x, y);
+        overlay.style.pointerEvents = oldPointerEvents;
+
+        return el?.closest?.("a[href]") || null;
+      }
+
+      function primeiraInteracao(ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+
+        const anchor = linkSobPonteiro(ev);
+        ativarAudio();
+
+        if (anchor) {
+          tocarClone(audioClick, 0.55);
+          setTimeout(() => {
+            window.location.assign(anchor.href);
+          }, 80);
+        }
+      }
+
+      if (overlay) {
+        overlay.addEventListener("click", primeiraInteracao, { passive: false });
+        overlay.addEventListener("touchend", primeiraInteracao, { passive: false });
+
+        overlay.addEventListener("keydown", (ev) => {
+          if (ev.key === "Enter" || ev.key === " ") {
+            primeiraInteracao(ev);
+          }
+        });
+      }
+
+      document.addEventListener("pointerover", (ev) => {
+        if (!audioAtivado) return;
+        if (ev.pointerType && ev.pointerType !== "mouse") return;
+
+        const link = ev.target.closest?.("a[href]");
+        if (!link) return;
+
+        const agora = performance.now();
+        if (agora - ultimoHover < 90) return;
+        ultimoHover = agora;
+
+        tocarClone(audioHover, 0.35);
+      });
+
+      document.addEventListener("click", (ev) => {
+        const link = ev.target.closest?.("a[href]");
+        if (!link) return;
+        if (!audioAtivado) return;
+        if (ev.defaultPrevented) return;
+        if (link.target && link.target !== "_self") return;
+        if (link.hasAttribute("download")) return;
+        if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+
+        ev.preventDefault();
+        tocarClone(audioClick, 0.55);
+
+        setTimeout(() => {
+          window.location.assign(link.href);
+        }, 80);
+      });
+
+      document.addEventListener("touchstart", (ev) => {
+        const link = ev.target.closest?.("a[href]");
+        if (!link) return;
+        if (!audioAtivado) return;
+
+        tocarClone(audioClick, 0.55);
+      }, { passive: true });
+
+      function trazerMidPraFrente() {
+        nerferirynMidWrap.classList.add("front");
+        nerferirynMidWrap.classList.remove("back");
+
+        nerferirynCharWrap.classList.add("back");
+        nerferirynCharWrap.classList.remove("front");
+      }
+
+      function trazerCharPraFrente() {
+        nerferirynCharWrap.classList.add("front");
+        nerferirynCharWrap.classList.remove("back");
+
+        nerferirynMidWrap.classList.add("back");
+        nerferirynMidWrap.classList.remove("front");
+      }
+
+      trazerMidPraFrente();
+
+      nerferirynChar.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        if (audioAtivado) {
+          tocarClone(audioChar, 0.7);
+        }
+        trazerMidPraFrente();
+      });
+
+      nerferirynMid.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        if (audioAtivado) {
+          tocarClone(audioChar, 0.7);
+        }
+        trazerCharPraFrente();
+      });
+    })();
+  </script>
+</body>
+</html>
