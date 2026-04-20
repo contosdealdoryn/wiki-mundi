@@ -15,10 +15,11 @@
       margin: 0;
       font-family: 'Cinzel', serif;
       background:
-        radial-gradient(circle at 50% 0%, rgba(180, 225, 255, 0.22), transparent 28%),
-        radial-gradient(circle at 15% 12%, rgba(150, 205, 255, 0.16), transparent 18%),
-        radial-gradient(circle at 85% 10%, rgba(120, 185, 255, 0.12), transparent 16%),
-        linear-gradient(180deg, #18385f 0%, #102949 30%, #0b1e36 58%, #07121f 82%, #040b14 100%);
+        linear-gradient(rgba(10,20,40,0.65), rgba(10,20,40,0.85)),
+        url('img_pico.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       color: #cfeeff;
       min-height: 100vh;
       position: relative;
@@ -533,5 +534,62 @@
       </div>
     </section>
   </main>
+
+  <audio id="audio-hover" preload="auto">
+    <source src="mouse_acima.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="audio-click" preload="auto">
+    <source src="clique_acima.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    (() => {
+      const hoverBase = document.getElementById('audio-hover');
+      const clickBase = document.getElementById('audio-click');
+      const interactives = document.querySelectorAll('summary, a');
+
+      let audioAtivado = false;
+      let ultimoHover = 0;
+
+      function tocarClone(audio, volume = 1) {
+        if (!audio) return;
+        try {
+          const src = audio.currentSrc || audio.querySelector('source')?.src;
+          if (!src) return;
+          const fx = new Audio(src);
+          fx.volume = volume;
+          const p = fx.play();
+          if (p && typeof p.catch === 'function') p.catch(() => {});
+        } catch (e) {}
+      }
+
+      function liberarAudio() {
+        if (audioAtivado) return;
+        audioAtivado = true;
+      }
+
+      interactives.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          if (!audioAtivado) return;
+          const agora = performance.now();
+          if (agora - ultimoHover < 90) return;
+          ultimoHover = agora;
+          tocarClone(hoverBase, 0.35);
+        });
+      });
+
+      document.addEventListener('click', () => {
+        liberarAudio();
+        tocarClone(clickBase, 0.55);
+      });
+
+      document.addEventListener('touchstart', () => {
+        liberarAudio();
+        tocarClone(clickBase, 0.55);
+      }, { passive: true });
+    })();
+  </script>
+</body>
 </body>
 </html>
