@@ -63,6 +63,7 @@
         drop-shadow(0 0 5px rgba(180, 230, 255, 0.45))
         drop-shadow(0 0 10px rgba(120, 200, 255, 0.25));
       animation: entrarMid 1.2s ease-out both, geloPulse 3s ease-in-out infinite;
+      animation: entrarMidBack 1.2s ease-out both, geloPulse 3s ease-in-out infinite;
     }
 
     .left img.char {
@@ -91,7 +92,7 @@
        
      .left img.back {
           z-index: 2 !important;
-          opacity: 0.9;
+          opacity: 0.35;
           transform: scale(0.97);
           animation: geloPulseBack 3s ease-in-out infinite;
     }    
@@ -212,6 +213,17 @@
         opacity: 1;
       }
     }
+
+          @keyframes entrarMidBack {
+        from {
+          transform: translateX(220px) scale(0.97);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0) scale(0.97);
+          opacity: 0.35; /* mesmo valor da sua .back */
+        }
+      }
 
     @keyframes geloPulse {
          0% {
