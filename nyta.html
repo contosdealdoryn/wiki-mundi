@@ -47,18 +47,34 @@
       box-shadow: inset 0 0 22px rgba(0,0,0,0.28), inset 0 0 38px rgba(255,255,255,0.03);
     }
 
-    .left img.mid {
+    .img-wrap {
       position: absolute;
-      left: -30px;
       bottom: 0;
+      transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
+    }
+
+    .mid-wrap {
+      left: -30px;
       height: 104%;
-      width: auto;
       z-index: 2;
+    }
+
+    .char-wrap {
+      right: 10px;
+      height: 95%;
+      z-index: 4;
+    }
+
+    .left img.mid {
+      position: relative;
+      display: block;
+      width: auto;
+      height: 100%;
       object-fit: contain;
       image-rendering: auto;
       transform: translateZ(0);
       cursor: pointer;
-      transition: transform 0.25s ease, opacity 0.25s ease;
+      pointer-events: auto;
       filter:
         drop-shadow(0 0 5px rgba(143, 188, 143, 0.45))
         drop-shadow(0 0 10px rgba(107, 142, 35, 0.25));
@@ -66,33 +82,32 @@
     }
 
     .left img.char {
-      position: absolute;
-      right: 10px;
-      bottom: 0;
-      height: 95%;
+      position: relative;
+      display: block;
       width: auto;
-      z-index: 4;
+      height: 100%;
       object-fit: contain;
       image-rendering: auto;
       transform: translateZ(0);
       cursor: pointer;
-      transition: transform 0.25s ease, opacity 0.25s ease;
+      pointer-events: auto;
       filter:
         drop-shadow(0 0 6px rgba(143, 188, 143, 0.5))
         drop-shadow(0 0 12px rgba(107, 142, 35, 0.3));
       animation: entrarChar 1.2s ease-out both, geloPulse 3s ease-in-out infinite;
     }
 
-    .left img.front {
+    .img-wrap.front {
       z-index: 6 !important;
       transform: scale(1.02);
       opacity: 1;
+      filter: none;
     }
 
-    .left img.back {
+    .img-wrap.back {
       z-index: 2 !important;
-      opacity: 0.55;
       transform: scale(0.97);
+      opacity: 0.55;
       filter: brightness(0.65);
     }
 
@@ -298,12 +313,12 @@
         overflow-wrap: anywhere;
       }
 
-      .left img.mid {
+      .mid-wrap {
         left: -70px;
         height: 106%;
       }
 
-      .left img.char {
+      .char-wrap {
         right: -8px;
         height: 98%;
       }
@@ -340,9 +355,15 @@
 <body>
   <div class="container">
     <div class="left">
-      <img class="mid" id="nytaMid" src="nyta_mid.png" alt="Arte complementar">
+      <div class="img-wrap mid-wrap front" id="nytaMidWrap">
+        <img class="mid" id="nytaMid" src="nyta_mid.png" alt="Arte complementar">
+      </div>
+
       <div class="left-effects"></div>
-      <img class="char" id="nytaChar" src="nyta_png.png" alt="Nyta">
+
+      <div class="img-wrap char-wrap back" id="nytaCharWrap">
+        <img class="char" id="nytaChar" src="nyta_png.png" alt="Nyta">
+      </div>
     </div>
 
     <div class="right">
@@ -388,6 +409,8 @@
       const audioClick = document.getElementById("audio-click");
       const nytaMid = document.getElementById("nytaMid");
       const nytaChar = document.getElementById("nytaChar");
+      const nytaMidWrap = document.getElementById("nytaMidWrap");
+      const nytaCharWrap = document.getElementById("nytaCharWrap");
 
       let audioAtivado = false;
       let somEntradaTocado = false;
@@ -523,19 +546,19 @@
       }, { passive: true });
 
       function trazerMidPraFrente() {
-        nytaMid.classList.add("front");
-        nytaMid.classList.remove("back");
+        nytaMidWrap.classList.add("front");
+        nytaMidWrap.classList.remove("back");
 
-        nytaChar.classList.add("back");
-        nytaChar.classList.remove("front");
+        nytaCharWrap.classList.add("back");
+        nytaCharWrap.classList.remove("front");
       }
 
       function trazerCharPraFrente() {
-        nytaChar.classList.add("front");
-        nytaChar.classList.remove("back");
+        nytaCharWrap.classList.add("front");
+        nytaCharWrap.classList.remove("back");
 
-        nytaMid.classList.add("back");
-        nytaMid.classList.remove("front");
+        nytaMidWrap.classList.add("back");
+        nytaMidWrap.classList.remove("front");
       }
 
       // estado inicial
