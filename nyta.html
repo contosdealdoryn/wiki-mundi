@@ -60,9 +60,8 @@
       cursor: pointer;
       transition: transform 0.25s ease, opacity 0.25s ease;
       filter:
-        drop-shadow(0 0 6px rgba(143, 188, 143, 0.75))
-        drop-shadow(0 0 14px rgba(107, 142, 35, 0.55))
-        drop-shadow(0 0 24px rgba(85, 107, 47, 0.45));
+        drop-shadow(0 0 5px rgba(143, 188, 143, 0.45))
+        drop-shadow(0 0 10px rgba(107, 142, 35, 0.25));
       animation: entrarMid 1.2s ease-out both, geloPulse 3s ease-in-out infinite;
     }
 
@@ -79,9 +78,8 @@
       cursor: pointer;
       transition: transform 0.25s ease, opacity 0.25s ease;
       filter:
-        drop-shadow(0 0 8px rgba(143, 188, 143, 0.85))
-        drop-shadow(0 0 18px rgba(107, 142, 35, 0.65))
-        drop-shadow(0 0 30px rgba(85, 107, 47, 0.55));
+        drop-shadow(0 0 6px rgba(143, 188, 143, 0.5))
+        drop-shadow(0 0 12px rgba(107, 142, 35, 0.3));
       animation: entrarChar 1.2s ease-out both, geloPulse 3s ease-in-out infinite;
     }
 
@@ -214,24 +212,21 @@
     }
 
     @keyframes geloPulse {
-      0% {
-        filter:
-          drop-shadow(0 0 6px rgba(143, 188, 143, 0.68))
-          drop-shadow(0 0 12px rgba(107, 142, 35, 0.5))
-          drop-shadow(0 0 20px rgba(85, 107, 47, 0.32));
-      }
-      50% {
-        filter:
-          drop-shadow(0 0 14px rgba(210, 225, 170, 0.95))
-          drop-shadow(0 0 28px rgba(143, 188, 143, 0.85))
-          drop-shadow(0 0 50px rgba(107, 142, 35, 0.7));
-      }
-      100% {
-        filter:
-          drop-shadow(0 0 6px rgba(143, 188, 143, 0.68))
-          drop-shadow(0 0 12px rgba(107, 142, 35, 0.5))
-          drop-shadow(0 0 20px rgba(85, 107, 47, 0.32));
-      }
+            0% {
+          filter:
+            drop-shadow(0 0 5px rgba(143, 188, 143, 0.4))
+            drop-shadow(0 0 10px rgba(107, 142, 35, 0.25));
+        }
+        50% {
+          filter:
+            drop-shadow(0 0 9px rgba(170, 196, 130, 0.6))
+            drop-shadow(0 0 18px rgba(107, 142, 35, 0.4));
+        }
+        100% {
+          filter:
+            drop-shadow(0 0 5px rgba(143, 188, 143, 0.4))
+            drop-shadow(0 0 10px rgba(107, 142, 35, 0.25));
+        }
     }
 
     @keyframes auraPulse {
