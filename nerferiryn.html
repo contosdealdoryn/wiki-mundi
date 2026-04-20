@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Os Contos de Aldoryn - Wiki</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Cinzel', serif;
+  background: radial-gradient(circle at center, #1a1a1a, #0d0d0d);
+  color: #ffe6c7;
+}
+
+.container {
+  display: flex;
+  align-items: stretch;
+  gap: 30px;
+  padding: 30px;
+  min-height: 100vh;
+}
+
+/* LEFT */
+
+.left {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #d4a24a;
+  border-radius: 22px;
+  box-shadow: 0 0 20px rgba(212,162,74,0.25);
+  background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url('fundo3.png') center/cover no-repeat;
+}
+
+/* WRAPPERS */
+
+.img-wrap {
+  position: absolute;
+  bottom: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
+}
+
+.mid-wrap {
+  left: -30px;
+  height: 104%;
+  z-index: 2;
+}
+
+.char-wrap {
+  right: 10px;
+  height: 95%;
+  z-index: 4;
+}
+
+/* IMAGENS */
+
+.left img.mid,
+.left img.char {
+  height: 100%;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+/* GLOW FOGO */
+
+.mid {
+  filter: drop-shadow(0 0 6px rgba(255,180,90,0.5));
+  animation: entrarMid 1.2s ease-out both, glow 3s infinite;
+}
+
+.char {
+  filter: drop-shadow(0 0 8px rgba(255,140,60,0.6));
+  animation: entrarChar 1.2s ease-out both, glow 3s infinite;
+}
+
+/* ESTADOS */
+
+.img-wrap.front {
+  z-index: 6 !important;
+  transform: scale(1.02);
+  opacity: 1;
+}
+
+.img-wrap.back {
+  z-index: 2 !important;
+  transform: scale(0.97);
+  opacity: 0.55;
+  filter: brightness(0.65);
+}
+
+/* AURA FOGO */
+
+.left-effects {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 30%, rgba(255,120,60,0.22) 0%, rgba(255,120,60,0.06) 18%, transparent 38%),
+    radial-gradient(circle at 30% 70%, rgba(255,200,100,0.16) 0%, rgba(255,200,100,0.05) 16%, transparent 34%),
+    radial-gradient(circle at center, transparent 58%, rgba(0,0,0,0.35) 100%);
+  animation: auraPulse 5s ease-in-out infinite alternate;
+}
+
+/* PARTÍCULAS */
+
+.left::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(255,210,150,0.7) 0 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(255,140,60,0.5) 0 1px, transparent 1.6px);
+  background-size: 140px 140px, 110px 110px;
+  background-position: 10% 20%, 35% 65%;
+  opacity: 0.5;
+  animation: particlesFloat 12s linear infinite;
+}
+
+/* ANIMAÇÕES */
+
+@keyframes entrarMid {
+  from { transform: translateX(220px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes entrarChar {
+  from { transform: translateX(-220px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes glow {
+  0%,100% { filter: drop-shadow(0 0 6px rgba(255,180,90,0.4)); }
+  50% { filter: drop-shadow(0 0 14px rgba(255,120,40,0.8)); }
+}
+
+@keyframes auraPulse {
+  from { transform: scale(1); opacity: 0.9; }
+  to { transform: scale(1.02); opacity: 1; }
+}
+
+@keyframes particlesFloat {
+  from { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(-8px) translateX(6px); }
+  to { transform: translateY(-16px) translateX(-4px); }
+}
+
+/* RIGHT */
+
+.right {
+  width: 420px;
+  border: 3px solid #d4a24a;
+  border-radius: 22px;
+  padding: 28px;
+  background: linear-gradient(145deg, #111, #1c1c1c);
+  box-shadow: 0 0 20px rgba(212,162,74,0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 36px;
+  margin-bottom: 18px;
+  text-shadow: 0 0 10px rgba(255,180,90,0.5);
+}
+
+.bio-text {
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.menu-links {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menu-links a {
+  text-decoration: none;
+  border: 2px solid #d4a24a;
+  padding: 12px;
+  text-align: center;
+  color: #ffe6c7;
+  background: #111;
+  border-radius: 10px;
+  transition: 0.25s;
+}
+
+.menu-links a:hover {
+  background: #d4a24a;
+  color: #111;
+  box-shadow: 0 0 10px #d4a24a;
+  transform: scale(1.03);
+}
+
+.menu-links .voltar {
+  margin-top: 10px;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="left">
+
+  <div class="img-wrap mid-wrap front" id="midWrap">
+    <img class="mid" id="mid" src="nerferiryn_mid.png">
+  </div>
+
+  <div class="left-effects"></div>
+
+  <div class="img-wrap char-wrap back" id="charWrap">
+    <img class="char" id="char" src="nerferiryn_png.png">
+  </div>
+
+</div>
+
+<div class="right">
+
+<div class="title">NERFERIRYN</div>
+
+<div class="bio-text">
+<em>
+A implacável Gran-Maga da Flama sustenta com punhos de ferro a coroa do Sol eterno, governando absoluta a nação durante os últimos 3 mil anos com astúcia, seriedade e rigor.<br><br>
+Uma Rainha Elfa reclusa em seu palácio, regada aos luxos extremos da sua dinastia, buscando confrontar as fronteiras que separam o plano real dos outros mundos.<br><br>
+Suas conexões superiores com o Espiritum levou a população a reverenciá-la como uma Deusa.
+</em>
+</div>
+
+<div class="menu-links">
+<a href="#">Ficha Técnica</a>
+<a href="#">Dados Avançados</a>
+<a href="#">Magias & Técnicas</a>
+<a href="#">História</a>
+<a href="#">Curtas (One-Shots)</a>
+<a href="#">Artes</a>
+<a href="index.html" class="voltar">VOLTAR</a>
+</div>
+
+</div>
+</div>
+
+<script>
+const midWrap = document.getElementById("midWrap");
+const charWrap = document.getElementById("charWrap");
+
+const mid = document.getElementById("mid");
+const char = document.getElementById("char");
+
+function trazerMid() {
+  midWrap.classList.add("front");
+  midWrap.classList.remove("back");
+  charWrap.classList.add("back");
+  charWrap.classList.remove("front");
+}
+
+function trazerChar() {
+  charWrap.classList.add("front");
+  charWrap.classList.remove("back");
+  midWrap.classList.add("back");
+  midWrap.classList.remove("front");
+}
+
+char.onclick = trazerMid;
+mid.onclick = trazerChar;
+</script>
+
+</body>
+</html>
