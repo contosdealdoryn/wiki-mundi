@@ -133,71 +133,62 @@
       background: linear-gradient(145deg, #111, #1c1c1c);
       box-shadow: 0 0 20px rgba(127, 209, 255, 0.25);
       box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .title {
       text-align: center;
       font-size: 36px;
-      margin-bottom: 25px;
+      margin-bottom: 18px;
       font-weight: bold;
       letter-spacing: 2px;
-      text-shadow: 0 0 10px rgba(127, 209, 255, 0.35);
+      text-shadow: 0 0 10px rgba(127, 209, 255, 0.25);
     }
 
-    .info {
+    .bio-text {
+      width: 100%;
+      text-align: center;
+      color: #cfeeff;
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .menu-links {
+      width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      width: 100%;
       align-items: center;
+      gap: 12px;
     }
 
-    .row {
-      display: flex;
-      gap: 10px;
-      width: auto;
-      justify-content: center;
-    }
-
-    .label {
-      width: 150px;
-      min-width: 150px;
-      max-width: 150px;
-      border: 2px solid #7fd1ff;
-      padding: 10px;
-      background: #111;
-      text-align: center;
-      box-sizing: border-box;
-    }
-
-    .label.vazio {
-      visibility: hidden;
-    }
-
-    .value {
-      width: 220px;
-      min-width: 220px;
-      max-width: 220px;
-    }
-
-    .value a {
+    .menu-links a {
       display: block;
       width: 100%;
+      max-width: 300px;
       text-decoration: none;
       border: 2px solid #7fd1ff;
-      padding: 10px;
+      padding: 12px 14px;
       color: #cfeeff;
       background: linear-gradient(145deg, #1a1a1a, #111);
       text-align: center;
       transition: 0.25s;
       box-sizing: border-box;
+      border-radius: 10px;
     }
 
-    .value a:hover {
+    .menu-links a:hover {
       background: #7fd1ff;
       color: #111;
       box-shadow: 0 0 10px #7fd1ff;
       transform: scale(1.03);
+    }
+
+    .menu-links a.voltar {
+      margin-top: 10px;
+      font-weight: bold;
     }
 
     @keyframes entrarMid {
@@ -267,15 +258,6 @@
     }
 
     @media (max-width: 768px) {
-      .info {
-        align-items: stretch;
-      }
-
-      .row {
-        width: 100%;
-        justify-content: flex-start;
-      }
-
       .container {
         flex-direction: column;
         align-items: center;
@@ -301,31 +283,20 @@
         margin-bottom: 18px;
       }
 
-      .info {
-        gap: 8px;
+      .bio-text {
+        font-size: 13px;
+        line-height: 1.65;
+        margin-bottom: 20px;
       }
 
-      .row {
-        gap: 8px;
+      .menu-links {
+        gap: 10px;
       }
 
-      .label {
-        width: calc(42% - 4px);
-        min-width: 0;
-        max-width: none;
-        padding: 10px 6px;
-        font-size: 11px;
-      }
-
-      .value {
-        width: calc(58% - 4px);
-        min-width: 0;
-        max-width: none;
-      }
-
-      .value a {
-        padding: 10px 6px;
-        font-size: 11px;
+      .menu-links a {
+        max-width: 100%;
+        padding: 12px 10px;
+        font-size: 13px;
         word-break: break-word;
         overflow-wrap: anywhere;
       }
@@ -380,66 +351,18 @@
     <div class="right">
       <div class="title">RAGARDO</div>
 
-      <div class="info">
-        <div class="row">
-          <div class="label">Nacionalidade</div>
-          <div class="value"><a href="nacionalidade.html">Montes Wesland</a></div>
-        </div>
+      <div class="bio-text">
+        <em>O renomado General de Reginforte e comandante da terceira maior infantaria de Montes Wesland, é também um dos Legattus, (General da Ordem &amp; Equilíbrio) servente fiel da casta real de Dufahim.<br><br>Apesar da sua aparência humanoide, Ragardo possui o sangue de um dos lendários Mísceres-Dragões, protetores primordiais da Árvore da Vida. Seus juramentos a manutenção das Gran-Magas da Glacial são tão inabaláveis quanto suas emoções.</em>
+      </div>
 
-        <div class="row">
-          <div class="label">Cidade</div>
-          <div class="value"><a href="cidade.html">Reginforte</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Raça</div>
-          <div class="value"><a href="raca.html">Míscere-Dragão</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Elemental</div>
-          <div class="value"><a href="elemento.html">Glacial</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Ocupação</div>
-          <div class="value"><a href="ocupacao.html">General Ordem &amp; Equilíbrio</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label vazio"></div>
-          <div class="value"><a href="ocup_guardareal.html">General da Guarda Real</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Arma</div>
-          <div class="value"><a href="arma.html">Dragonslasher</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Relíquia</div>
-          <div class="value"><a href="reliquia.html">Safira de Iglis</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Dom</div>
-          <div class="value"><a href="dom.html">Mutação do Kaiser</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Maldição</div>
-          <div class="value"><a href="maldicao.html">N/A</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Espírito Guardião</div>
-          <div class="value"><a href="espirito.html">N/A</a></div>
-        </div>
-
-        <div class="row">
-          <div class="label">Explosão</div>
-          <div class="value"><a href="explosao.html">Sequência do Kaiser</a></div>
-        </div>
+      <div class="menu-links">
+        <a href="ficha-tecnica.html">Ficha Técnica</a>
+        <a href="dados-avancados.html">Dados Avançados</a>
+        <a href="magiccias-tecnicas.html">Magiccias &amp; Técnicas</a>
+        <a href="historia.html">História</a>
+        <a href="curtas-one-shots.html">Curtas (One-Shots)</a>
+        <a href="artes.html">Artes</a>
+        <a href="index.html" class="voltar">VOLTAR</a>
       </div>
     </div>
   </div>
