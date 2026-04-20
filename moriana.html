@@ -88,23 +88,19 @@
       transform: scale(1.02);
       opacity: 1;
     }
-
-        .left img.back {
-      z-index: 2 !important;
-      opacity: 0.95;
-    
-      filter:
-        brightness(0.35)
-        contrast(0.9)
-        saturate(0.6)
-        hue-rotate(200deg) /* AZUL */
-        blur(0.8px);
-    
-      transform: scale(0.97);
-    
-      /* remove glow quando estiver atrás */
-      animation: none;
-    }
+       
+     .left img.back {
+          z-index: 2 !important;
+          opacity: 0.9;
+        
+          filter:
+            brightness(0.55)   /* escurece leve */
+            saturate(0.9)      /* mantém cor */
+            hue-rotate(190deg) /* leve tom azul */
+            blur(0.6px);       /* profundidade suave */
+        
+          transform: scale(0.97);
+        }    
 
     .left-effects {
       position: absolute;
