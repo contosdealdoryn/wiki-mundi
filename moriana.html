@@ -76,7 +76,7 @@
       image-rendering: auto;
       transform: translateZ(0);
       cursor: pointer;
-      transition: transform 0.25s ease, opacity 0.25s ease;
+      transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
       filter:
         drop-shadow(0 0 6px rgba(180, 230, 255, 0.5))
         drop-shadow(0 0 12px rgba(120, 200, 255, 0.3));
@@ -89,18 +89,21 @@
       opacity: 1;
     }
 
-    .left img.back {
-        z-index: 2 !important;
-        opacity: 0.12;
-      
-        filter:
-          brightness(0.4)
-          saturate(1.5)
-          contrast(0.85)
-          blur(3px);
-      
-        transform: scale(0.97);
-        blur(10px); /* leve desfoque */
+        .left img.back {
+      z-index: 2 !important;
+      opacity: 0.95;
+    
+      filter:
+        brightness(0.35)
+        contrast(0.9)
+        saturate(0.6)
+        hue-rotate(200deg) /* AZUL */
+        blur(0.8px);
+    
+      transform: scale(0.97);
+    
+      /* remove glow quando estiver atrás */
+      animation: none;
     }
 
     .left-effects {
