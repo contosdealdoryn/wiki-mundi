@@ -91,7 +91,9 @@
 
     .left img.back {
       z-index: 2 !important;
-      opacity: 0.85;
+      opacity: 0.55;
+      transform: scale(0.97);
+      filter: brightness(0.65);
     }
 
     .left-effects {
@@ -537,7 +539,7 @@
       }
 
       // estado inicial
-      trazerCharPraFrente();
+      trazerMidPraFrente();
 
       // clicar no ragardo_png sobe o ragardo_mid
       ragardoChar.addEventListener("click", (ev) => {
