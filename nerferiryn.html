@@ -1,281 +1,340 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Os Contos de Aldoryn - Wiki</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contos de Aldoryn - Início</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="mouse_acima.mp3" as="audio" type="audio/mpeg">
+  <link rel="preload" href="char_aparece.mp3" as="audio" type="audio/mpeg">
+  <link rel="preload" href="clique_acima.mp3" as="audio" type="audio/mpeg">
 
-<style>
-body {
-  margin: 0;
-  font-family: 'Cinzel', serif;
-  background: radial-gradient(circle at center, #1a1a1a, #0d0d0d);
-  color: #ffe6c7;
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cinzel', serif;
+      background: radial-gradient(circle at center, #1a1a1a, #0d0d0d);
+      color: #ffe6c7;
+    }
 
-.container {
-  display: flex;
-  align-items: stretch;
-  gap: 30px;
-  padding: 30px;
-  min-height: 100vh;
-}
+    .container {
+      display: flex;
+      align-items: stretch;
+      gap: 30px;
+      padding: 30px;
+      box-sizing: border-box;
+      min-height: 100vh;
+    }
 
-/* LEFT */
+    .left {
+      flex: 1;
+      min-width: 0;
+      position: relative;
+      overflow: hidden;
+      border: 3px solid #d4a24a;
+      border-radius: 22px;
+      box-shadow: 0 0 20px rgba(212,162,74,0.25);
+      background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url('fundo3.png') center/cover no-repeat;
+    }
 
-.left {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-  border: 3px solid #d4a24a;
-  border-radius: 22px;
-  box-shadow: 0 0 20px rgba(212,162,74,0.25);
-  background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url('fundo3.png') center/cover no-repeat;
-}
+    .left::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      box-shadow: inset 0 0 22px rgba(0,0,0,0.28), inset 0 0 38px rgba(255,255,255,0.03);
+    }
 
-/* WRAPPERS */
+    .img-wrap {
+      position: absolute;
+      bottom: 0;
+      transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
+    }
 
-.img-wrap {
-  position: absolute;
-  bottom: 0;
-  transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
-}
+    .mid-wrap {
+      left: -30px;
+      height: 104%;
+      z-index: 2;
+    }
 
-.mid-wrap {
-  left: -30px;
-  height: 104%;
-  z-index: 2;
-}
+    .char-wrap {
+      right: 10px;
+      height: 95%;
+      z-index: 4;
+    }
 
-.char-wrap {
-  right: 10px;
-  height: 95%;
-  z-index: 4;
-}
+    .left img.mid,
+    .left img.char {
+      position: relative;
+      display: block;
+      width: auto;
+      height: 100%;
+      object-fit: contain;
+      image-rendering: auto;
+      transform: translateZ(0);
+      cursor: pointer;
+      pointer-events: auto;
+    }
 
-/* IMAGENS */
+    .left img.mid {
+      filter:
+        drop-shadow(0 0 5px rgba(255, 180, 90, 0.45))
+        drop-shadow(0 0 10px rgba(255, 130, 50, 0.25));
+      animation: entrarMid 1.2s ease-out both, glow 3s ease-in-out infinite;
+    }
 
-.left img.mid,
-.left img.char {
-  height: 100%;
-  object-fit: contain;
-  cursor: pointer;
-}
+    .left img.char {
+      filter:
+        drop-shadow(0 0 6px rgba(255, 180, 90, 0.5))
+        drop-shadow(0 0 12px rgba(255, 130, 50, 0.3));
+      animation: entrarChar 1.2s ease-out both, glow 3s ease-in-out infinite;
+    }
 
-/* GLOW FOGO */
+    .img-wrap.front {
+      z-index: 6 !important;
+      transform: scale(1.02);
+      opacity: 1;
+      filter: none;
+    }
 
-.mid {
-  filter: drop-shadow(0 0 6px rgba(255,180,90,0.5));
-  animation: entrarMid 1.2s ease-out both, glow 3s infinite;
-}
+    .img-wrap.back {
+      z-index: 2 !important;
+      transform: scale(0.97);
+      opacity: 0.55;
+      filter: brightness(0.65);
+    }
 
-.char {
-  filter: drop-shadow(0 0 8px rgba(255,140,60,0.6));
-  animation: entrarChar 1.2s ease-out both, glow 3s infinite;
-}
+    .left-effects {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 18% 30%, rgba(255,120,60,0.22) 0%, rgba(255,120,60,0.06) 18%, transparent 38%),
+        radial-gradient(circle at 30% 70%, rgba(255,200,100,0.16) 0%, rgba(255,200,100,0.05) 16%, transparent 34%),
+        radial-gradient(circle at center, transparent 58%, rgba(0,0,0,0.35) 100%);
+      animation: auraPulse 5s ease-in-out infinite alternate;
+    }
 
-/* ESTADOS */
+    .left::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(255,210,150,0.7) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,140,60,0.5) 0 1px, transparent 1.6px);
+      background-size: 140px 140px, 110px 110px;
+      background-position: 10% 20%, 35% 65%;
+      opacity: 0.5;
+      animation: particlesFloat 12s linear infinite;
+    }
 
-.img-wrap.front {
-  z-index: 6 !important;
-  transform: scale(1.02);
-  opacity: 1;
-}
+    .right {
+      flex: 0 0 420px;
+      width: 420px;
+      position: relative;
+      border: 3px solid #d4a24a;
+      border-radius: 22px;
+      padding: 28px;
+      background: linear-gradient(145deg, #111, #1c1c1c);
+      box-shadow: 0 0 20px rgba(212,162,74,0.25);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-.img-wrap.back {
-  z-index: 2 !important;
-  transform: scale(0.97);
-  opacity: 0.55;
-  filter: brightness(0.65);
-}
+    .title {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 18px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(255,180,90,0.45);
+    }
 
-/* AURA FOGO */
+    .bio-text {
+      width: 100%;
+      text-align: center;
+      color: #ffe6c7;
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
 
-.left-effects {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 18% 30%, rgba(255,120,60,0.22) 0%, rgba(255,120,60,0.06) 18%, transparent 38%),
-    radial-gradient(circle at 30% 70%, rgba(255,200,100,0.16) 0%, rgba(255,200,100,0.05) 16%, transparent 34%),
-    radial-gradient(circle at center, transparent 58%, rgba(0,0,0,0.35) 100%);
-  animation: auraPulse 5s ease-in-out infinite alternate;
-}
+    .menu-links {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
 
-/* PARTÍCULAS */
+    .menu-links a {
+      display: block;
+      width: 100%;
+      max-width: 300px;
+      text-decoration: none;
+      border: 2px solid #d4a24a;
+      padding: 12px 14px;
+      color: #ffe6c7;
+      background: linear-gradient(145deg, #1a1a1a, #111);
+      text-align: center;
+      transition: 0.25s;
+      box-sizing: border-box;
+      border-radius: 10px;
+    }
 
-.left::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  background-image:
-    radial-gradient(circle, rgba(255,210,150,0.7) 0 1px, transparent 1.5px),
-    radial-gradient(circle, rgba(255,140,60,0.5) 0 1px, transparent 1.6px);
-  background-size: 140px 140px, 110px 110px;
-  background-position: 10% 20%, 35% 65%;
-  opacity: 0.5;
-  animation: particlesFloat 12s linear infinite;
-}
+    .menu-links a:hover {
+      background: #d4a24a;
+      color: #111;
+      box-shadow: 0 0 10px #d4a24a;
+      transform: scale(1.03);
+    }
 
-/* ANIMAÇÕES */
+    .menu-links a.voltar {
+      margin-top: 10px;
+      font-weight: bold;
+    }
 
-@keyframes entrarMid {
-  from { transform: translateX(220px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
+    @keyframes entrarMid {
+      from {
+        transform: translateX(220px) translateZ(0);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0) translateZ(0);
+        opacity: 1;
+      }
+    }
 
-@keyframes entrarChar {
-  from { transform: translateX(-220px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
+    @keyframes entrarChar {
+      from {
+        transform: translateX(-220px) translateZ(0);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0) translateZ(0);
+        opacity: 1;
+      }
+    }
 
-@keyframes glow {
-  0%,100% { filter: drop-shadow(0 0 6px rgba(255,180,90,0.4)); }
-  50% { filter: drop-shadow(0 0 14px rgba(255,120,40,0.8)); }
-}
+    @keyframes glow {
+      0% {
+        filter:
+          drop-shadow(0 0 5px rgba(255, 180, 90, 0.4))
+          drop-shadow(0 0 10px rgba(255, 130, 50, 0.25));
+      }
+      50% {
+        filter:
+          drop-shadow(0 0 9px rgba(255, 210, 140, 0.7))
+          drop-shadow(0 0 18px rgba(255, 120, 40, 0.45));
+      }
+      100% {
+        filter:
+          drop-shadow(0 0 5px rgba(255, 180, 90, 0.4))
+          drop-shadow(0 0 10px rgba(255, 130, 50, 0.25));
+      }
+    }
 
-@keyframes auraPulse {
-  from { transform: scale(1); opacity: 0.9; }
-  to { transform: scale(1.02); opacity: 1; }
-}
+    @keyframes auraPulse {
+      from {
+        transform: scale(1);
+        opacity: 0.9;
+      }
+      to {
+        transform: scale(1.02);
+        opacity: 1;
+      }
+    }
 
-@keyframes particlesFloat {
-  from { transform: translateY(0px) translateX(0px); }
-  50% { transform: translateY(-8px) translateX(6px); }
-  to { transform: translateY(-16px) translateX(-4px); }
-}
+    @keyframes particlesFloat {
+      from {
+        transform: translateY(0px) translateX(0px);
+      }
+      50% {
+        transform: translateY(-8px) translateX(6px);
+      }
+      to {
+        transform: translateY(-16px) translateX(-4px);
+      }
+    }
 
-/* RIGHT */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+        padding: 18px;
+        gap: 18px;
+      }
 
-.right {
-  width: 420px;
-  border: 3px solid #d4a24a;
-  border-radius: 22px;
-  padding: 28px;
-  background: linear-gradient(145deg, #111, #1c1c1c);
-  box-shadow: 0 0 20px rgba(212,162,74,0.25);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+      .left {
+        width: 100%;
+        height: 380px;
+        min-height: 380px;
+      }
 
-.title {
-  font-size: 36px;
-  margin-bottom: 18px;
-  text-shadow: 0 0 10px rgba(255,180,90,0.5);
-}
+      .right {
+        width: 100%;
+        max-width: 100%;
+        padding: 36px 20px 42px;
+        border-radius: 30px;
+      }
 
-.bio-text {
-  text-align: center;
-  font-size: 15px;
-  line-height: 1.7;
-  margin-bottom: 24px;
-}
+      .title {
+        font-size: 28px;
+        margin-bottom: 18px;
+      }
 
-.menu-links {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+      .bio-text {
+        font-size: 13px;
+        line-height: 1.65;
+        margin-bottom: 20px;
+      }
 
-.menu-links a {
-  text-decoration: none;
-  border: 2px solid #d4a24a;
-  padding: 12px;
-  text-align: center;
-  color: #ffe6c7;
-  background: #111;
-  border-radius: 10px;
-  transition: 0.25s;
-}
+      .menu-links {
+        gap: 10px;
+      }
 
-.menu-links a:hover {
-  background: #d4a24a;
-  color: #111;
-  box-shadow: 0 0 10px #d4a24a;
-  transform: scale(1.03);
-}
+      .menu-links a {
+        max-width: 100%;
+        padding: 12px 10px;
+        font-size: 13px;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
 
-.menu-links .voltar {
-  margin-top: 10px;
-  font-weight: bold;
-}
-</style>
-</head>
+      .mid-wrap {
+        left: -70px;
+        height: 106%;
+      }
 
-<body>
+      .char-wrap {
+        right: -8px;
+        height: 98%;
+      }
+    }
 
-<div class="container">
+    #audio-activation-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      border: 0;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      opacity: 0.001;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-<div class="left">
-
-  <div class="img-wrap mid-wrap front" id="midWrap">
-    <img class="mid" id="mid" src="nerferiryn_mid.png">
-  </div>
-
-  <div class="left-effects"></div>
-
-  <div class="img-wrap char-wrap back" id="charWrap">
-    <img class="char" id="char" src="nerferiryn_png.png">
-  </div>
-
-</div>
-
-<div class="right">
-
-<div class="title">NERFERIRYN</div>
-
-<div class="bio-text">
-<em>
-A implacável Gran-Maga da Flama sustenta com punhos de ferro a coroa do Sol eterno, governando absoluta a nação do Leste durante os últimos 3 mil anos com astúcia, seriedade e rigor.<br><br>
-Uma Rainha Elfa reclusa em seu palácio, regada aos luxos extremos da sua dinastia, buscando confrontar as fronteiras que separam o plano real dos outros mundos.<br><br>
-Suas conexões superiores com o Espiritum levou a população a reverenciá-la como uma Deusa.
-</em>
-</div>
-
-<div class="menu-links">
-<a href="#">Ficha Técnica</a>
-<a href="#">Dados Avançados</a>
-<a href="#">Magias & Técnicas</a>
-<a href="#">História</a>
-<a href="#">Curtas (One-Shots)</a>
-<a href="#">Artes</a>
-<a href="index.html" class="voltar">VOLTAR</a>
-</div>
-
-</div>
-</div>
-
-<script>
-const midWrap = document.getElementById("midWrap");
-const charWrap = document.getElementById("charWrap");
-
-const mid = document.getElementById("mid");
-const char = document.getElementById("char");
-
-function trazerMid() {
-  midWrap.classList.add("front");
-  midWrap.classList.remove("back");
-  charWrap.classList.add("back");
-  charWrap.classList.remove("front");
-}
-
-function trazerChar() {
-  charWrap.classList.add("front");
-  charWrap.classList.remove("back");
-  midWrap.classList.add("back");
-  midWrap.classList.remove("front");
-}
-
-char.onclick = trazerMid;
-mid.onclick = trazerChar;
-</script>
-
-</body>
-</html>
+    .sr-only {
+      position: absolute !important;
+      width: 1px;
+      height: 1px;
+      padding: 0;
