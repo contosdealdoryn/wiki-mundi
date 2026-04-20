@@ -90,8 +90,13 @@
     }
 
     .left img.back {
-      z-index: 2 !important;
-      opacity: 0.85;
+       z-index: 2 !important;
+        opacity: 0.3;
+        filter:
+        grayscale(70%)
+        brightness(0.6)
+        blur(1px); /* leve desfoque */
+        transform: scale(0.98); /* leve recuo */
     }
 
     .left-effects {
