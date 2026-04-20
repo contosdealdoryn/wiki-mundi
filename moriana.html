@@ -93,7 +93,7 @@
           z-index: 2 !important;
           opacity: 1.25;
           transform: scale(0.97);
-          animation: geloPulseBack 3s ease-in-out infinite;
+          animation: entrarMidBack 1.2s ease-out both, geloPulseBack 3s ease-in-out infinite;
     }    
 
     .left-effects {
@@ -194,6 +194,17 @@
     @keyframes entrarMid {
       from {
         transform: translateX(220px) translateZ(0);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0) translateZ(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes entrarMidBack {
+      from {
+        transform: translateX(-220px) translateZ(0);
         opacity: 0;
       }
       to {
