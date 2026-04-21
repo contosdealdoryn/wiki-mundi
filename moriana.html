@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Os Contos de Aldoryn - Wiki</title>
+  <title>Contos de Aldoryn - Início</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 
   <link rel="preload" href="mouse_acima.mp3" as="audio" type="audio/mpeg">
@@ -85,15 +85,15 @@
 
     .left img.front {
       z-index: 6 !important;
-      transform: scale(1.02);
+      transform: scale(1.03) !important;
       opacity: 1;
     }
        
      .left img.back {
           z-index: 2 !important;
-          opacity: 1.25;
+          opacity: 0.55;
           transform: scale(0.97);
-          /*animation: entrarMidBack 1.2s ease-out both, geloPulseBack 3s ease-in-out infinite;*/
+          filter: brightness(0.65);
     }    
 
     .left-effects {
@@ -463,20 +463,6 @@
       }
     }
 
-    #audio-activation-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 999999;
-      border: 0;
-      margin: 0;
-      padding: 0;
-      background: transparent;
-      opacity: 0.001;
-      cursor: pointer;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-    }
-
     .sr-only {
       position: absolute !important;
       width: 1px;
@@ -564,10 +550,6 @@
     </div>
   </div>
 
-  <button id="audio-activation-overlay" type="button" aria-label="Ativar áudio do site">
-    <span class="sr-only">Ativar áudio do site</span>
-  </button>
-
   <audio id="audio-char" preload="auto">
     <source src="char_aparece.mp3" type="audio/mpeg">
   </audio>
@@ -582,7 +564,6 @@
 
   <script>
     (() => {
-      const overlay = document.getElementById("audio-activation-overlay");
       const audioChar = document.getElementById("audio-char");
       const audioHover = document.getElementById("audio-hover");
       const audioClick = document.getElementById("audio-click");
@@ -590,7 +571,6 @@
       const morianaChar = document.getElementById("morianaChar");
 
       let audioAtivado = false;
-      let somEntradaTocado = false;
       let ultimoHover = 0;
 
       function tocarBase(audio, volume = 1) {
@@ -621,65 +601,18 @@
           if (p && typeof p.catch === "function") p.catch(() => {});
         } catch (e) {}
       }
-
       function ativarAudio() {
         if (audioAtivado) return;
         audioAtivado = true;
-
-        if (!somEntradaTocado) {
-          somEntradaTocado = true;
-          tocarBase(audioChar, 0.7);
-        }
-
-        if (overlay) overlay.remove();
       }
 
-      function linkSobPonteiro(ev) {
-        if (!overlay) return null;
-
-        const x =
-          typeof ev.clientX === "number"
-            ? ev.clientX
-            : ev.changedTouches?.[0]?.clientX;
-
-        const y =
-          typeof ev.clientY === "number"
-            ? ev.clientY
-            : ev.changedTouches?.[0]?.clientY;
-
-        if (typeof x !== "number" || typeof y !== "number") return null;
-
-        const oldPointerEvents = overlay.style.pointerEvents;
-        overlay.style.pointerEvents = "none";
-        const el = document.elementFromPoint(x, y);
-        overlay.style.pointerEvents = oldPointerEvents;
-
-        return el?.closest?.("a[href]") || null;
-      }
-
-      function primeiraInteracao(ev) {
-        ev.preventDefault();
-        ev.stopPropagation();
-
-        const anchor = linkSobPonteiro(ev);
+      document.addEventListener("pointerdown", () => {
         ativarAudio();
+      }, { passive: true });
 
-        if (anchor) {
-          tocarClone(audioClick, 0.55);
-          setTimeout(() => {
-            window.location.assign(anchor.href);
-          }, 80);
-        }
-      }
-
-      if (overlay) {
-        overlay.addEventListener("click", primeiraInteracao, { passive: false });
-        overlay.addEventListener("touchend", primeiraInteracao, { passive: false });
-
-        overlay.addEventListener("keydown", (ev) => {
-          if (ev.key === "Enter" || ev.key === " ") {
-            primeiraInteracao(ev);
-          }
+      document.addEventListener("keydown", () => {
+        ativarAudio();
+      });
         });
       }
 
