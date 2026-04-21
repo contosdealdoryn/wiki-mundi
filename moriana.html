@@ -47,38 +47,18 @@
       box-shadow: inset 0 0 22px rgba(0,0,0,0.28), inset 0 0 38px rgba(255,255,255,0.03);
     }
 
-    .img-wrap {
+    .left img.mid {
       position: absolute;
-      bottom: 0;
-      transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
-    }
-
-    .mid-wrap {
       left: -30px;
+      bottom: 0;
       height: 104%;
-      z-index: 2;
-    }
-
-    .char-wrap {
-      right: 10px;
-      height: 95%;
-      z-index: 4;
-    }
-
-    .left img.mid,
-    .left img.char {
-      position: relative;
-      display: block;
       width: auto;
-      height: 100%;
+      z-index: 2;
       object-fit: contain;
       image-rendering: auto;
       transform: translateZ(0);
       cursor: pointer;
-      pointer-events: auto;
-    }
-
-    .left img.mid {
+      transition: transform 0.25s ease, opacity 0.25s ease;
       filter:
         drop-shadow(0 0 5px rgba(180, 230, 255, 0.45))
         drop-shadow(0 0 10px rgba(120, 200, 255, 0.25));
@@ -86,25 +66,35 @@
     }
 
     .left img.char {
+      position: absolute;
+      right: 10px;
+      bottom: 0;
+      height: 95%;
+      width: auto;
+      z-index: 4;
+      object-fit: contain;
+      image-rendering: auto;
+      transform: translateZ(0);
+      cursor: pointer;
+      transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
       filter:
         drop-shadow(0 0 6px rgba(180, 230, 255, 0.5))
         drop-shadow(0 0 12px rgba(120, 200, 255, 0.3));
       animation: entrarChar 1.2s ease-out both, geloPulse 3s ease-in-out infinite;
     }
 
-    .img-wrap.front {
+    .left img.front {
       z-index: 6 !important;
       transform: scale(1.02);
       opacity: 1;
-      filter: none;
     }
-
-    .img-wrap.back {
-      z-index: 2 !important;
-      transform: scale(0.97);
-      opacity: 0.80;
-      filter: brightness(0.75);
-    }
+       
+     .left img.back {
+          z-index: 2 !important;
+          opacity: 1.25;
+          transform: scale(0.97);
+          /*animation: entrarMidBack 1.2s ease-out both, geloPulseBack 3s ease-in-out infinite;*/
+    }    
 
     .left-effects {
       position: absolute;
@@ -212,6 +202,7 @@
       }
     }
 
+    
     @keyframes entrarChar {
       from {
         transform: translateX(-220px) translateZ(0);
@@ -223,8 +214,9 @@
       }
     }
 
+        
     @keyframes geloPulse {
-      0% {
+         0% {
         filter:
           drop-shadow(0 0 5px rgba(180, 230, 255, 0.4))
           drop-shadow(0 0 10px rgba(120, 200, 255, 0.25));
@@ -240,6 +232,35 @@
           drop-shadow(0 0 10px rgba(120, 200, 255, 0.25));
       }
     }
+
+          @keyframes geloPulseBack {
+        0% {
+          filter:
+            brightness(0.55)
+            saturate(0.9)         
+            blur(0.6px)
+            drop-shadow(0 0 4px rgba(180, 230, 255, 0.25))
+            drop-shadow(0 0 8px rgba(120, 200, 255, 0.15));
+        }
+      
+        50% {
+          filter:
+            brightness(0.6)
+            saturate(0.95)
+            blur(0.7px)
+            drop-shadow(0 0 7px rgba(200, 240, 255, 0.35))
+            drop-shadow(0 0 12px rgba(140, 210, 255, 0.2));
+        }
+      
+        100% {
+          filter:
+            brightness(0.55)
+            saturate(0.9)
+            blur(0.6px)
+            drop-shadow(0 0 4px rgba(180, 230, 255, 0.25))
+            drop-shadow(0 0 8px rgba(120, 200, 255, 0.15));
+        }
+      }
 
     @keyframes auraPulse {
       from {
@@ -263,6 +284,122 @@
         transform: translateY(-16px) translateX(-4px);
       }
     }
+
+
+    .panel-view {
+      width: 100%;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .sheet-view {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sheet-scroll {
+      width: 100%;
+      max-height: 560px;
+      overflow-y: auto;
+      padding-right: 8px;
+      box-sizing: border-box;
+    }
+
+    .sheet-scroll::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .sheet-scroll::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.05);
+      border-radius: 999px;
+    }
+
+    .sheet-scroll::-webkit-scrollbar-thumb {
+      background: rgba(127, 209, 255, 0.45);
+      border-radius: 999px;
+      border: 1px solid rgba(127, 209, 255, 0.25);
+    }
+
+    .sheet-title {
+      width: 100%;
+      text-align: center;
+      font-size: 20px;
+      margin: 0 0 14px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(127, 209, 255, 0.25);
+    }
+
+    .sheet-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 10px;
+      margin-bottom: 22px;
+      align-items: stretch;
+    }
+
+    .sheet-key,
+    .sheet-value {
+      border: 2px solid #7fd1ff;
+      background: linear-gradient(145deg, #1a1a1a, #111);
+      color: #cfeeff;
+      padding: 10px 12px;
+      box-sizing: border-box;
+      text-align: center;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sheet-key {
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .sheet-value {
+      font-size: 12px;
+      line-height: 1.45;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    .sheet-back-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 6px;
+    }
+
+    .sheet-back-btn {
+      display: block;
+      width: 100%;
+      max-width: 300px;
+      text-decoration: none;
+      border: 2px solid #7fd1ff;
+      padding: 12px 14px;
+      color: #cfeeff;
+      background: linear-gradient(145deg, #1a1a1a, #111);
+      text-align: center;
+      transition: 0.25s;
+      box-sizing: border-box;
+      border-radius: 10px;
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .sheet-back-btn:hover {
+      background: #7fd1ff;
+      color: #111;
+      box-shadow: 0 0 10px #7fd1ff;
+      transform: scale(1.03);
+    }
+
 
     @media (max-width: 768px) {
       .container {
@@ -308,12 +445,12 @@
         overflow-wrap: anywhere;
       }
 
-      .mid-wrap {
+      .left img.mid {
         left: -70px;
         height: 106%;
       }
 
-      .char-wrap {
+      .left img.char {
         right: -8px;
         height: 98%;
       }
@@ -350,32 +487,72 @@
 <body>
   <div class="container">
     <div class="left">
-      <div class="img-wrap mid-wrap front" id="morianaMidWrap">
-        <img class="mid" id="morianaMid" src="moriana_mid.png" alt="Arte complementar">
-      </div>
-
+      <img class="mid" id="morianaMid" src="moriana_mid.png" alt="Arte complementar">
       <div class="left-effects"></div>
-
-      <div class="img-wrap char-wrap back" id="morianaCharWrap">
-        <img class="char" id="morianaChar" src="moriana_png.png" alt="Moriana">
-      </div>
+      <img class="char" id="morianaChar" src="moriana_png.png" alt="Moriana">
     </div>
 
     <div class="right">
-      <div class="title">MORIANA</div>
+      <div id="morianaHomeView" class="panel-view">
+        <div class="title">MORIANA</div>
 
-      <div class="bio-text">
-        <em>Moriana, fruto de uma profecia desvirtuada, lutou contra a lógica do impossível e recusou as correntes do destino.<br><br>Transformou seu maior anseio em realidade, florescendo na forma que habitava seus sonhos mais íntimos.<br><br>E em troca da renascença idealizada, se abdicou da maioria dos sentimentos humanos, sintetizando-se numa bela, imponente e determinada presença, porém, de coração vazio e completamente congelado.<br></em>
+        <div class="bio-text">
+          <em>Moriana, fruto de uma profecia desvirtuada, lutou contra a lógica do impossível e recusou as correntes do destino.<br><br>Transformou seu maior anseio em realidade, florescendo na forma que habitava seus sonhos mais íntimos.<br><br>E em troca da renascença idealizada, se abdicou da maioria dos sentimentos humanos, sintetizando-se numa bela, imponente e determinada presença, porém, de coração vazio e completamente congelado.<br></em>
+        </div>
+
+        <div class="menu-links">
+          <a href="#" id="btnFichaTecnica">Ficha Técnica</a>
+          <a href="dados-avancados.html">Dados Avançados</a>
+          <a href="magiccias-tecnicas.html">Magiccias &amp; Técnicas</a>
+          <a href="historia.html">História</a>
+          <a href="curtas-one-shots.html">Curtas (One-Shots)</a>
+          <a href="artes.html">Artes</a>
+          <a href="index.html" class="voltar">VOLTAR</a>
+        </div>
       </div>
 
-      <div class="menu-links">
-        <a href="ficha-tecnica.html">Ficha Técnica</a>
-        <a href="dados-avancados.html">Dados Avançados</a>
-        <a href="magiccias-tecnicas.html">Magiccias &amp; Técnicas</a>
-        <a href="historia.html">História</a>
-        <a href="curtas-one-shots.html">Curtas (One-Shots)</a>
-        <a href="artes.html">Artes</a>
-        <a href="index.html" class="voltar">VOLTAR</a>
+      <div id="morianaFichaView" class="panel-view sheet-view hidden">
+        <div class="sheet-scroll">
+          <div class="sheet-title">• BÁSICO</div>
+
+          <div class="sheet-grid">
+            <div class="sheet-key">NOME INTEIRO</div><div class="sheet-value">MORIANA</div>
+            <div class="sheet-key">ALCUNHA(S)</div><div class="sheet-value">MORI, CRIANÇA MALDITA, APHRODISIA, “EME”</div>
+            <div class="sheet-key">ANIVERSÁRIO</div><div class="sheet-value">17/02</div>
+            <div class="sheet-key">IDADE</div><div class="sheet-value">25 ANOS</div>
+            <div class="sheet-key">RAÇA</div><div class="sheet-value">HUMANA</div>
+            <div class="sheet-key">GENERO</div><div class="sheet-value">MULHER TRANS</div>
+            <div class="sheet-key">NACIONALIDADE</div><div class="sheet-value">WESLANIANA</div>
+            <div class="sheet-key">CIDADE NATAL</div><div class="sheet-value">EÓSITA</div>
+            <div class="sheet-key">STATUS ATUAL</div><div class="sheet-value">VIVA</div>
+            <div class="sheet-key">OCUPAÇÃO ATUAL</div><div class="sheet-value">GRAN-MAGA</div>
+            <div class="sheet-key">NOME DO PAI</div><div class="sheet-value">BERYON DE EÓSITA</div>
+            <div class="sheet-key">NOME DA MÃE</div><div class="sheet-value">VAILINE</div>
+            <div class="sheet-key">IRMÃOS</div><div class="sheet-value">???</div>
+          </div>
+
+          <div class="sheet-title">• FÍSICO</div>
+
+          <div class="sheet-grid">
+            <div class="sheet-key">ALTURA</div><div class="sheet-value">1,85CM</div>
+            <div class="sheet-key">PESO</div><div class="sheet-value">81KG</div>
+            <div class="sheet-key">BUSTO</div><div class="sheet-value">108CM</div>
+            <div class="sheet-key">CINTURA</div><div class="sheet-value">62CM</div>
+            <div class="sheet-key">QUADRIL</div><div class="sheet-value">119CM</div>
+            <div class="sheet-key">TIPO DE FÍSICO</div><div class="sheet-value">AMPULHETA</div>
+            <div class="sheet-key">EXPRESSÃO</div><div class="sheet-value">IMPONENTE, ARROGANTE, VAZIA, SEDUTORA</div>
+            <div class="sheet-key">POSTURA</div><div class="sheet-value">INDIFERENTE, CONFIANTE, SENSUAL</div>
+            <div class="sheet-key">COR DA PELE</div><div class="sheet-value">BRONZE (MÉDIO)</div>
+            <div class="sheet-key">COR DOS OLHOS</div><div class="sheet-value">AZUL TURQUESA (CLARO)</div>
+            <div class="sheet-key">TAMANHO DOS OLHOS</div><div class="sheet-value">PEQUENOS, SEMICERRADOS</div>
+            <div class="sheet-key">COR DO CABELO</div><div class="sheet-value">PRETO C/ CONTRASTES LEVES (AZUL)</div>
+            <div class="sheet-key">ESTILO DO CABELO</div><div class="sheet-value">MUITO LONGO, ONDULADO, FRANJA RETA, DUAS MADEIXAS</div>
+          </div>
+        </div>
+
+        <div class="sheet-back-wrap">
+          <button type="button" id="btnVoltarHome" class="sheet-back-btn">VOLTAR</button>
+        </div>
       </div>
     </div>
   </div>
@@ -402,11 +579,8 @@
       const audioChar = document.getElementById("audio-char");
       const audioHover = document.getElementById("audio-hover");
       const audioClick = document.getElementById("audio-click");
-
       const morianaMid = document.getElementById("morianaMid");
       const morianaChar = document.getElementById("morianaChar");
-      const morianaMidWrap = document.getElementById("morianaMidWrap");
-      const morianaCharWrap = document.getElementById("morianaCharWrap");
 
       let audioAtivado = false;
       let somEntradaTocado = false;
@@ -542,19 +716,48 @@
       }, { passive: true });
 
       function trazerMidPraFrente() {
-        morianaMidWrap.classList.add("front");
-        morianaMidWrap.classList.remove("back");
+        morianaMid.classList.add("front");
+        morianaMid.classList.remove("back");
 
-        morianaCharWrap.classList.add("back");
-        morianaCharWrap.classList.remove("front");
+        morianaChar.classList.add("back");
+        morianaChar.classList.remove("front");
       }
 
       function trazerCharPraFrente() {
-        morianaCharWrap.classList.add("front");
-        morianaCharWrap.classList.remove("back");
+        morianaChar.classList.add("front");
+        morianaChar.classList.remove("back");
 
-        morianaMidWrap.classList.add("back");
-        morianaMidWrap.classList.remove("front");
+        morianaMid.classList.add("back");
+        morianaMid.classList.remove("front");
+      }
+
+
+      function abrirFichaTecnica(ev) {
+        if (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+        }
+
+        morianaHomeView.classList.add("hidden");
+        morianaFichaView.classList.remove("hidden");
+      }
+
+      function voltarParaHome(ev) {
+        if (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+        }
+
+        morianaFichaView.classList.add("hidden");
+        morianaHomeView.classList.remove("hidden");
+      }
+
+      if (btnFichaTecnica) {
+        btnFichaTecnica.addEventListener("click", abrirFichaTecnica);
+      }
+
+      if (btnVoltarHome) {
+        btnVoltarHome.addEventListener("click", voltarParaHome);
       }
 
       // estado inicial
