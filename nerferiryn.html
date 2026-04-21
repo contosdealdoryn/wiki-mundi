@@ -50,7 +50,14 @@
     .img-wrap {
       position: absolute;
       bottom: 0;
-      transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
+      transition: opacity 0.25s ease, filter 0.25s ease;
+      pointer-events: none;
+    }
+
+    .img-wrap .inner {
+      height: 100%;
+      transition: transform 0.25s ease;
+      pointer-events: none;
     }
 
     .mid-wrap {
@@ -82,28 +89,34 @@
       filter:
         drop-shadow(0 0 5px rgba(255, 180, 90, 0.45))
         drop-shadow(0 0 10px rgba(255, 130, 50, 0.25));
-      animation: entrarMid 1.2s ease-out both, glow 3s ease-in-out infinite;
+      animation: entrarMid 1.2s ease-out both, geloPulse 3s ease-in-out infinite;
     }
 
     .left img.char {
       filter:
         drop-shadow(0 0 6px rgba(255, 180, 90, 0.5))
         drop-shadow(0 0 12px rgba(255, 130, 50, 0.3));
-      animation: entrarChar 1.2s ease-out both, glow 3s ease-in-out infinite;
+      animation: entrarChar 1.2s ease-out both, geloPulse 3s ease-in-out infinite;
     }
 
     .img-wrap.front {
       z-index: 6 !important;
-      transform: scale(1.02);
       opacity: 1;
       filter: none;
     }
 
+    .img-wrap.front .inner {
+      transform: scale(1.03);
+    }
+
     .img-wrap.back {
       z-index: 2 !important;
-      transform: scale(0.97);
       opacity: 0.55;
       filter: brightness(0.65);
+    }
+
+    .img-wrap.back .inner {
+      transform: scale(0.97);
     }
 
     .left-effects {
@@ -129,13 +142,15 @@
         radial-gradient(circle, rgba(255,140,60,0.5) 0 1px, transparent 1.6px);
       background-size: 140px 140px, 110px 110px;
       background-position: 10% 20%, 35% 65%;
-      opacity: 0.5;
+      opacity: 0.45;
       animation: particlesFloat 12s linear infinite;
     }
 
     .right {
       flex: 0 0 420px;
       width: 420px;
+      height: calc(100vh - 60px);
+      max-height: calc(100vh - 60px);
       position: relative;
       border: 3px solid #d4a24a;
       border-radius: 22px;
@@ -146,6 +161,54 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      overflow: hidden;
+    }
+
+    .panel-view {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .home-layout,
+    .sheet-layout {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .home-scroll,
+    .sheet-scroll {
+      width: 100%;
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding-right: 8px;
+      box-sizing: border-box;
+    }
+
+    .home-scroll::-webkit-scrollbar,
+    .sheet-scroll::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .home-scroll::-webkit-scrollbar-track,
+    .sheet-scroll::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.05);
+      border-radius: 999px;
+    }
+
+    .home-scroll::-webkit-scrollbar-thumb,
+    .sheet-scroll::-webkit-scrollbar-thumb {
+      background: rgba(127, 209, 255, 0.45);
+      border-radius: 999px;
+      border: 1px solid rgba(212,162,74,0.25);
     }
 
     .title {
@@ -155,6 +218,7 @@
       font-weight: bold;
       letter-spacing: 2px;
       text-shadow: 0 0 10px rgba(255,180,90,0.45);
+      flex-shrink: 0;
     }
 
     .bio-text {
@@ -172,9 +236,11 @@
       flex-direction: column;
       align-items: center;
       gap: 12px;
+      padding-bottom: 2px;
     }
 
-    .menu-links a {
+    .menu-links a,
+    .sheet-back-btn {
       display: block;
       width: 100%;
       max-width: 300px;
@@ -187,9 +253,13 @@
       transition: 0.25s;
       box-sizing: border-box;
       border-radius: 10px;
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      cursor: pointer;
     }
 
-    .menu-links a:hover {
+    .menu-links a:hover,
+    .sheet-back-btn:hover {
       background: #d4a24a;
       color: #111;
       box-shadow: 0 0 10px #d4a24a;
@@ -199,6 +269,58 @@
     .menu-links a.voltar {
       margin-top: 10px;
       font-weight: bold;
+    }
+
+    .sheet-title {
+      width: 100%;
+      text-align: center;
+      font-size: 20px;
+      margin: 0 0 14px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(212,162,74,0.25);
+    }
+
+    .sheet-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 165px minmax(0, 1fr);
+      gap: 10px;
+      margin-bottom: 22px;
+      align-items: stretch;
+    }
+
+    .sheet-key,
+    .sheet-value {
+      border: 2px solid #d4a24a;
+      background: linear-gradient(145deg, #1a1a1a, #111);
+      color: #ffe6c7;
+      padding: 10px 12px;
+      box-sizing: border-box;
+      text-align: center;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sheet-key {
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .sheet-value {
+      font-size: 12px;
+      line-height: 1.45;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    .sheet-back-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 12px;
+      flex-shrink: 0;
     }
 
     @keyframes entrarMid {
@@ -223,7 +345,7 @@
       }
     }
 
-    @keyframes glow {
+    @keyframes geloPulse {
       0% {
         filter:
           drop-shadow(0 0 5px rgba(255, 180, 90, 0.4))
@@ -281,6 +403,9 @@
       .right {
         width: 100%;
         max-width: 100%;
+        height: auto;
+        max-height: none;
+        min-height: 560px;
         padding: 36px 20px 42px;
         border-radius: 30px;
       }
@@ -300,12 +425,37 @@
         gap: 10px;
       }
 
-      .menu-links a {
+      .menu-links a,
+      .sheet-back-btn {
         max-width: 100%;
         padding: 12px 10px;
         font-size: 13px;
         word-break: break-word;
         overflow-wrap: anywhere;
+      }
+
+      .home-scroll,
+      .sheet-scroll {
+        max-height: 500px;
+        padding-right: 4px;
+      }
+
+      .sheet-title {
+        font-size: 17px;
+        margin-bottom: 10px;
+      }
+
+      .sheet-grid {
+        grid-template-columns: 42% 58%;
+        gap: 8px;
+        margin-bottom: 18px;
+      }
+
+      .sheet-key,
+      .sheet-value {
+        min-height: 44px;
+        padding: 10px 8px;
+        font-size: 11px;
       }
 
       .mid-wrap {
@@ -318,75 +468,96 @@
         height: 98%;
       }
     }
-
-    #audio-activation-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 999999;
-      border: 0;
-      margin: 0;
-      padding: 0;
-      background: transparent;
-      opacity: 0.001;
-      cursor: pointer;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .sr-only {
-      position: absolute !important;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      white-space: nowrap;
-      border: 0;
-      clip: rect(0 0 0 0);
-      clip-path: inset(50%);
-    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="left">
       <div class="img-wrap mid-wrap front" id="nerferirynMidWrap">
-        <img class="mid" id="nerferirynMid" src="nerferiryn_mid.png" alt="Arte complementar">
+        <div class="inner">
+          <img class="mid" id="nerferirynMid" src="nerferiryn_mid.png" alt="Arte complementar">
+        </div>
       </div>
 
       <div class="left-effects"></div>
 
       <div class="img-wrap char-wrap back" id="nerferirynCharWrap">
-        <img class="char" id="nerferirynChar" src="nerferiryn_png.png" alt="Nerferiryn">
+        <div class="inner">
+          <img class="char" id="nerferirynChar" src="nerferiryn_png.png" alt="Nerferiryn">
+        </div>
       </div>
     </div>
 
     <div class="right">
-      <div class="title">NERFERIRYN</div>
+      <div id="nerferirynHomeView" class="panel-view">
+        <div class="home-layout">
+          <div class="title">NERFERIRYN</div>
 
-      <div class="bio-text">
-        <em>
-          A implacável Gran-Maga da Flama sustenta com punhos de aço a coroa do Sol eterno, governando absoluta a nação do Leste durante os últimos 3 mil anos com astúcia, seriedade e rigor.<br><br>
-          Uma Rainha Elfa reclusa em seu palácio, regada aos luxos extremos da sua dinastia, buscando confrontar as fronteiras que separam o plano real dos outros mundos.<br><br>
-          Suas conexões superiores com o Espiritum levou a população a reverenciá-la como uma Deusa.
-        </em>
+          <div class="home-scroll">
+            <div class="bio-text">
+              <em>A implacável Gran-Maga da Flama sustenta com punhos de ferro a coroa do Sol eterno, governando absoluta a nação durante os últimos 3 mil anos com astúcia, seriedade e rigor.<br><br>Uma Rainha Elfa reclusa em seu palácio, regada aos luxos extremos da sua dinastia, buscando confrontar as fronteiras que separam o plano real dos outros mundos.<br><br>Suas conexões superiores com o Espiritum levou a população a reverenciá-la como uma Deusa.</em>
+            </div>
+
+            <div class="menu-links">
+              <a href="#" id="btnFichaTecnica">Ficha Técnica</a>
+              <a href="dados-avancados.html">Dados Avançados</a>
+              <a href="magiccias-tecnicas.html">Magiccias &amp; Técnicas</a>
+              <a href="historia.html">História</a>
+              <a href="curtas-one-shots.html">Curtas (One-Shots)</a>
+              <a href="artes.html">Artes</a>
+              <a href="index.html" class="voltar">VOLTAR</a>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="menu-links">
-        <a href="ficha-tecnica.html">Ficha Técnica</a>
-        <a href="dados-avancados.html">Dados Avançados</a>
-        <a href="magiccias-tecnicas.html">Magiccias &amp; Técnicas</a>
-        <a href="historia.html">História</a>
-        <a href="curtas-one-shots.html">Curtas (One-Shots)</a>
-        <a href="artes.html">Artes</a>
-        <a href="index.html" class="voltar">VOLTAR</a>
+      <div id="nerferirynFichaView" class="panel-view hidden">
+        <div class="sheet-layout">
+          <div class="sheet-scroll">
+            <div class="sheet-title">• BÁSICO</div>
+
+            <div class="sheet-grid">
+              <div class="sheet-key">NOME INTEIRO</div><div class="sheet-value">MORIANA</div>
+              <div class="sheet-key">ALCUNHA(S)</div><div class="sheet-value">MORI, CRIANÇA MALDITA, APHRODISIA, “EME”</div>
+              <div class="sheet-key">ANIVERSÁRIO</div><div class="sheet-value">17/02</div>
+              <div class="sheet-key">IDADE</div><div class="sheet-value">25 ANOS</div>
+              <div class="sheet-key">RAÇA</div><div class="sheet-value">HUMANA</div>
+              <div class="sheet-key">GENERO</div><div class="sheet-value">MULHER TRANS</div>
+              <div class="sheet-key">NACIONALIDADE</div><div class="sheet-value">WESLANIANA</div>
+              <div class="sheet-key">CIDADE NATAL</div><div class="sheet-value">EÓSITA</div>
+              <div class="sheet-key">STATUS ATUAL</div><div class="sheet-value">VIVA</div>
+              <div class="sheet-key">OCUPAÇÃO ATUAL</div><div class="sheet-value">GRAN-MAGA</div>
+              <div class="sheet-key">NOME DO PAI</div><div class="sheet-value">BERYON DE EÓSITA</div>
+              <div class="sheet-key">NOME DA MÃE</div><div class="sheet-value">VAILINE</div>
+              <div class="sheet-key">IRMÃOS</div><div class="sheet-value">???</div>
+            </div>
+
+            <div class="sheet-title">• FÍSICO</div>
+
+            <div class="sheet-grid">
+              <div class="sheet-key">ALTURA</div><div class="sheet-value">1,85CM</div>
+              <div class="sheet-key">PESO</div><div class="sheet-value">81KG</div>
+              <div class="sheet-key">BUSTO</div><div class="sheet-value">108CM</div>
+              <div class="sheet-key">CINTURA</div><div class="sheet-value">62CM</div>
+              <div class="sheet-key">QUADRIL</div><div class="sheet-value">119CM</div>
+              <div class="sheet-key">TIPO DE FÍSICO</div><div class="sheet-value">AMPULHETA</div>
+              <div class="sheet-key">EXPRESSÃO</div><div class="sheet-value">IMPONENTE, ARROGANTE, VAZIA, SEDUTORA</div>
+              <div class="sheet-key">POSTURA</div><div class="sheet-value">INDIFERENTE, CONFIANTE, SENSUAL</div>
+              <div class="sheet-key">COR DA PELE</div><div class="sheet-value">BRONZE (MÉDIO)</div>
+              <div class="sheet-key">COR DOS OLHOS</div><div class="sheet-value">AZUL TURQUESA (CLARO)</div>
+              <div class="sheet-key">TAMANHO DOS OLHOS</div><div class="sheet-value">PEQUENOS, SEMICERRADOS</div>
+              <div class="sheet-key">COR DO CABELO</div><div class="sheet-value">PRETO C/ CONTRASTES LEVES (AZUL)</div>
+              <div class="sheet-key">ESTILO DO CABELO</div><div class="sheet-value">MUITO LONGO, ONDULADO, FRANJA RETA, DUAS MADEIXAS</div>
+            </div>
+          </div>
+
+          <div class="sheet-back-wrap">
+            <button type="button" id="btnVoltarHome" class="sheet-back-btn">VOLTAR</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
-  <button id="audio-activation-overlay" type="button" aria-label="Ativar áudio do site">
-    <span class="sr-only">Ativar áudio do site</span>
-  </button>
 
   <audio id="audio-char" preload="auto">
     <source src="char_aparece.mp3" type="audio/mpeg">
@@ -402,7 +573,6 @@
 
   <script>
     (() => {
-      const overlay = document.getElementById("audio-activation-overlay");
       const audioChar = document.getElementById("audio-char");
       const audioHover = document.getElementById("audio-hover");
       const audioClick = document.getElementById("audio-click");
@@ -412,8 +582,12 @@
       const nerferirynMidWrap = document.getElementById("nerferirynMidWrap");
       const nerferirynCharWrap = document.getElementById("nerferirynCharWrap");
 
+      const nerferirynHomeView = document.getElementById("nerferirynHomeView");
+      const nerferirynFichaView = document.getElementById("nerferirynFichaView");
+      const btnFichaTecnica = document.getElementById("btnFichaTecnica");
+      const btnVoltarHome = document.getElementById("btnVoltarHome");
+
       let audioAtivado = false;
-      let somEntradaTocado = false;
       let ultimoHover = 0;
 
       function tocarBase(audio, volume = 1) {
@@ -445,105 +619,28 @@
         } catch (e) {}
       }
 
-      function ativarAudio() {
+      function liberarAudio() {
         if (audioAtivado) return;
         audioAtivado = true;
+      }
 
-        if (!somEntradaTocado) {
-          somEntradaTocado = true;
-          tocarBase(audioChar, 0.7);
+      function abrirFichaTecnica(ev) {
+        if (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
         }
-
-        if (overlay) overlay.remove();
+        nerferirynHomeView.classList.add("hidden");
+        nerferirynFichaView.classList.remove("hidden");
       }
 
-      function linkSobPonteiro(ev) {
-        if (!overlay) return null;
-
-        const x =
-          typeof ev.clientX === "number"
-            ? ev.clientX
-            : ev.changedTouches?.[0]?.clientX;
-
-        const y =
-          typeof ev.clientY === "number"
-            ? ev.clientY
-            : ev.changedTouches?.[0]?.clientY;
-
-        if (typeof x !== "number" || typeof y !== "number") return null;
-
-        const oldPointerEvents = overlay.style.pointerEvents;
-        overlay.style.pointerEvents = "none";
-        const el = document.elementFromPoint(x, y);
-        overlay.style.pointerEvents = oldPointerEvents;
-
-        return el?.closest?.("a[href]") || null;
-      }
-
-      function primeiraInteracao(ev) {
-        ev.preventDefault();
-        ev.stopPropagation();
-
-        const anchor = linkSobPonteiro(ev);
-        ativarAudio();
-
-        if (anchor) {
-          tocarClone(audioClick, 0.55);
-          setTimeout(() => {
-            window.location.assign(anchor.href);
-          }, 80);
+      function voltarParaHome(ev) {
+        if (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
         }
+        nerferirynFichaView.classList.add("hidden");
+        nerferirynHomeView.classList.remove("hidden");
       }
-
-      if (overlay) {
-        overlay.addEventListener("click", primeiraInteracao, { passive: false });
-        overlay.addEventListener("touchend", primeiraInteracao, { passive: false });
-
-        overlay.addEventListener("keydown", (ev) => {
-          if (ev.key === "Enter" || ev.key === " ") {
-            primeiraInteracao(ev);
-          }
-        });
-      }
-
-      document.addEventListener("pointerover", (ev) => {
-        if (!audioAtivado) return;
-        if (ev.pointerType && ev.pointerType !== "mouse") return;
-
-        const link = ev.target.closest?.("a[href]");
-        if (!link) return;
-
-        const agora = performance.now();
-        if (agora - ultimoHover < 90) return;
-        ultimoHover = agora;
-
-        tocarClone(audioHover, 0.35);
-      });
-
-      document.addEventListener("click", (ev) => {
-        const link = ev.target.closest?.("a[href]");
-        if (!link) return;
-        if (!audioAtivado) return;
-        if (ev.defaultPrevented) return;
-        if (link.target && link.target !== "_self") return;
-        if (link.hasAttribute("download")) return;
-        if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
-
-        ev.preventDefault();
-        tocarClone(audioClick, 0.55);
-
-        setTimeout(() => {
-          window.location.assign(link.href);
-        }, 80);
-      });
-
-      document.addEventListener("touchstart", (ev) => {
-        const link = ev.target.closest?.("a[href]");
-        if (!link) return;
-        if (!audioAtivado) return;
-
-        tocarClone(audioClick, 0.55);
-      }, { passive: true });
 
       function trazerMidPraFrente() {
         nerferirynMidWrap.classList.add("front");
@@ -561,23 +658,76 @@
         nerferirynMidWrap.classList.remove("front");
       }
 
-      trazerMidPraFrente();
+      if (btnFichaTecnica) {
+        btnFichaTecnica.addEventListener("click", abrirFichaTecnica);
+      }
+
+      if (btnVoltarHome) {
+        btnVoltarHome.addEventListener("click", voltarParaHome);
+      }
+
+      document.addEventListener("pointerover", (ev) => {
+        if (!audioAtivado) return;
+        if (ev.pointerType && ev.pointerType !== "mouse") return;
+
+        const link = ev.target.closest?.("a[href], button");
+        if (!link) return;
+
+        const agora = performance.now();
+        if (agora - ultimoHover < 90) return;
+        ultimoHover = agora;
+
+        tocarClone(audioHover, 0.35);
+      });
+
+      document.addEventListener("click", (ev) => {
+        liberarAudio();
+
+        const link = ev.target.closest?.("a[href]");
+        if (!link) return;
+        if (ev.defaultPrevented) return;
+        if (link.target && link.target !== "_self") return;
+        if (link.hasAttribute("download")) return;
+        if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+
+        const href = link.getAttribute("href") || "";
+        if (href === "#") return;
+
+        ev.preventDefault();
+        tocarClone(audioClick, 0.55);
+
+        setTimeout(() => {
+          window.location.assign(link.href);
+        }, 80);
+      });
+
+      document.addEventListener("touchstart", (ev) => {
+        liberarAudio();
+
+        const link = ev.target.closest?.("a[href], button");
+        if (!link) return;
+
+        const href = link.getAttribute?.("href") || "";
+        if (href === "#") return;
+
+        tocarClone(audioClick, 0.55);
+      }, { passive: true });
 
       nerferirynChar.addEventListener("click", (ev) => {
         ev.stopPropagation();
-        if (audioAtivado) {
-          tocarClone(audioChar, 0.7);
-        }
+        liberarAudio();
+        if (audioAtivado) tocarBase(audioChar, 0.7);
         trazerMidPraFrente();
       });
 
       nerferirynMid.addEventListener("click", (ev) => {
         ev.stopPropagation();
-        if (audioAtivado) {
-          tocarClone(audioChar, 0.7);
-        }
+        liberarAudio();
+        if (audioAtivado) tocarBase(audioChar, 0.7);
         trazerCharPraFrente();
       });
+
+      trazerMidPraFrente();
     })();
   </script>
 </body>
