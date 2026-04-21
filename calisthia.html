@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contos de Aldoryn - Início</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="preload" href="mouse_acima.mp3" as="audio" type="audio/mpeg">
+  <link rel="preload" href="char_aparece.mp3" as="audio" type="audio/mpeg">
+  <link rel="preload" href="clique_acima.mp3" as="audio" type="audio/mpeg">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cinzel', serif;
+      background: radial-gradient(circle at center, #1a1a1a, #0d0d0d);
+      color: #dbe8c8;
+    }
+
+    .container {
+      display: flex;
+      align-items: stretch;
+      gap: 30px;
+      padding: 30px;
+      box-sizing: border-box;
+      min-height: 100vh;
+    }
+
+    .left {
+      flex: 1;
+      min-width: 0;
+      position: relative;
+      overflow: hidden;
+      border: 3px solid #556b2f;
+      border-radius: 22px;
+      box-shadow: 0 0 20px rgba(85, 107, 47, 0.28);
+      background: linear-gradient(rgba(0,0,0,0.50), rgba(0,0,0,0.72)), url('fundo2.png') center/cover no-repeat;
+    }
+
+    .left::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      box-shadow: inset 0 0 22px rgba(0,0,0,0.34), inset 0 0 38px rgba(255,255,255,0.03);
+    }
+
+    .img-wrap {
+      position: absolute;
+      bottom: 0;
+      transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
+    }
+
+    .mid-wrap {
+      left: -30px;
+      height: 104%;
+      z-index: 2;
+    }
+
+    .char-wrap {
+      right: 10px;
+      height: 95%;
+      z-index: 4;
+    }
+
+    .left img.mid,
+    .left img.char {
+      position: relative;
+      display: block;
+      width: auto;
+      height: 100%;
+      object-fit: contain;
+      image-rendering: auto;
+      transform: translateZ(0);
+      cursor: pointer;
+      pointer-events: auto;
+    }
+
+    .left img.mid {
+      filter:
+        drop-shadow(0 0 5px rgba(143, 188, 143, 0.45))
+        drop-shadow(0 0 10px rgba(107, 142, 35, 0.25));
+      animation: entrarMid 1.2s ease-out both, glow 3s ease-in-out infinite;
+    }
+
+    .left img.char {
+      filter:
+        drop-shadow(0 0 6px rgba(143, 188, 143, 0.5))
+        drop-shadow(0 0 12px rgba(107, 142, 35, 0.3));
+      animation: entrarChar 1.2s ease-out both, glow 3s ease-in-out infinite;
+    }
+
+    .img-wrap.front {
+      z-index: 6 !important;
+      transform: scale(1.02);
+      opacity: 1;
+      filter: none;
+    }
+
+    .img-wrap.back {
+      z-index: 2 !important;
+      transform: scale(0.97);
+      opacity: 0.55;
+      filter: brightness(0.65);
+    }
+
+    .left-effects {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 18% 30%, rgba(143,188,143,0.18) 0%, rgba(143,188,143,0.06) 18%, transparent 38%),
+        radial-gradient(circle at 30% 70%, rgba(170,196,130,0.12) 0%, rgba(170,196,130,0.04) 16%, transparent 34%),
+        radial-gradient(circle at center, transparent 58%, rgba(0,0,0,0.40) 100%);
+      animation: auraPulse 5s ease-in-out infinite alternate;
+    }
+
+    .left::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(220,235,200,0.68) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(170,196,130,0.45) 0 1px, transparent 1.6px);
+      background-size: 140px 140px, 110px 110px;
+      background-position: 10% 20%, 35% 65%;
+      opacity: 0.45;
+      animation: particlesFloat 12s linear infinite;
+    }
+
+    .right {
+      flex: 0 0 420px;
+      width: 420px;
+      position: relative;
+      border: 3px solid #556b2f;
+      border-radius: 22px;
+      padding: 28px;
+      background: linear-gradient(145deg, #111, #1c1c1c);
+      box-shadow: 0 0 20px rgba(85, 107, 47, 0.28);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 18px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(85, 107, 47, 0.28);
+    }
+
+    .bio-text {
+      width: 100%;
+      text-align: center;
+      color: #dbe8c8;
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .menu-links {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .menu-links a {
+      display: block;
+      width: 100%;
+      max-width: 300px;
+      text-decoration: none;
+      border: 2px solid #556b2f;
+      padding: 12px 14px;
+      color: #dbe8c8;
+      background: linear-gradient(145deg, #1a1a1a, #111);
+      text-align: center;
+      transition: 0.25s;
+      box-sizing: border-box;
+      border-radius: 10px;
+    }
+
+    .menu-links a:hover {
+      background: #556b2f;
+      color: #111;
+      box-shadow: 0 0 10px #556b2f;
+      transform: scale(1.03);
+    }
+
+    .menu-links a.voltar {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    @keyframes entrarMid {
+      from {
+        transform: translateX(220px) translateZ(0);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0) translateZ(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes entrarChar {
+      from {
+        transform: translateX(-220px) translateZ(0);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0) translateZ(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes glow {
+      0% {
+        filter:
+          drop-shadow(0 0 5px rgba(143, 188, 143, 0.4))
+          drop-shadow(0 0 10px rgba(107, 142, 35, 0.25));
+      }
+      50% {
+        filter:
+          drop-shadow(0 0 9px rgba(170, 196, 130, 0.6))
+          drop-shadow(0 0 18px rgba(107, 142, 35, 0.4));
+      }
+      100% {
+        filter:
+          drop-shadow(0 0 5px rgba(143, 188, 143, 0.4))
+          drop-shadow(0 0 10px rgba(107, 142, 35, 0.25));
+      }
+    }
+
+    @keyframes auraPulse {
+      from {
+        transform: scale(1);
+        opacity: 0.9;
+      }
+      to {
+        transform: scale(1.02);
+        opacity: 1;
+      }
+    }
+
+    @keyframes particlesFloat {
+      from {
+        transform: translateY(0px) translateX(0px);
+      }
+      50% {
+        transform: translateY(-8px) translateX(6px);
+      }
+      to {
+        transform: translateY(-16px) translateX(-4px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+        padding: 18px;
+        gap: 18px;
+      }
+
+      .left {
+        width: 100%;
+        height: 380px;
+        min-height: 380px;
+      }
+
+      .right {
+        width: 100%;
+        max-width: 100%;
+        padding: 36px 20px 42px;
+        border-radius: 30px;
+      }
+
+      .title {
+        font-size: 28px;
+        margin-bottom: 18px;
+      }
+
+      .bio-text {
+        font-size: 13px;
+        line-height: 1.65;
+        margin-bottom: 20px;
+      }
+
+      .menu-links {
+        gap: 10px;
+      }
+
+      .menu-links a {
+        max-width: 100%;
+        padding: 12px 10px;
+        font-size: 13px;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+
+      .mid-wrap {
+        left: -70px;
+        height: 106%;
+      }
+
+      .char-wrap {
+        right: -8px;
+        height: 98%;
+      }
+    }
+
+    #audio-activation-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      border: 0;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      opacity: 0.001;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .sr-only {
+      position: absolute !important;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      white-space: nowrap;
+      border: 0;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <div class="img-wrap mid-wrap front" id="calisthiaMidWrap">
+        <img class="mid" id="calisthiaMid" src="calisthia_mid.png" alt="Arte complementar">
+      </div>
+
+      <div class="left-effects"></div>
+
+      <div class="img-wrap char-wrap back" id="calisthiaCharWrap">
+        <img class="char" id="calisthiaChar" src="calisthia_png.png" alt="Calisthia">
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="title">CALISTHIA</div>
+
+      <div class="bio-text">
+        <em>
+          Sobre um pico que atravessa o teto de nuvens e arranha as fronteiras do globo com o espaço, Calisthia sobrevive numa rotina intensa, constantemente sobrecarregada de tarefas.<br><br>
+          Como Princesa de Ardorya, comandante do exército da Tempestade e Gran-Maga da Nebulosa, ela vive unicamente em função dos cargos.<br><br>
+          Apesar disso, a “princesa Dúbia” é extremamente calma, ponderada e querida por todos da sua nação, embora oculte um lado um tanto quanto... Enigmático.
+        </em>
+      </div>
+
+      <div class="menu-links">
+        <a href="ficha-tecnica.html">Ficha Técnica</a>
+        <a href="dados-avancados.html">Dados Avançados</a>
+        <a href="magiccias-tecnicas.html">Magiccias &amp; Técnicas</a>
+        <a href="historia.html">História</a>
+        <a href="curtas-one-shots.html">Curtas (One-Shots)</a>
+        <a href="artes.html">Artes</a>
+        <a href="index.html" class="voltar">VOLTAR</a>
+      </div>
+    </div>
+  </div>
+
+  <button id="audio-activation-overlay" type="button" aria-label="Ativar áudio do site">
+    <span class="sr-only">Ativar áudio do site</span>
+  </button>
+
+  <audio id="audio-char" preload="auto">
+    <source src="char_aparece.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="audio-hover" preload="auto">
+    <source src="mouse_acima.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="audio-click" preload="auto">
+    <source src="clique_acima.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    (() => {
+      const overlay = document.getElementById("audio-activation-overlay");
+      const audioChar = document.getElementById("audio-char");
+      const audioHover = document.getElementById("audio-hover");
+      const audioClick = document.getElementById("audio-click");
+
+      const calisthiaMid = document.getElementById("calisthiaMid");
+      const calisthiaChar = document.getElementById("calisthiaChar");
+      const calisthiaMidWrap = document.getElementById("calisthiaMidWrap");
+      const calisthiaCharWrap = document.getElementById("calisthiaCharWrap");
+
+      let audioAtivado = false;
+      let somEntradaTocado = false;
+      let ultimoHover = 0;
+
+      function tocarBase(audio, volume = 1) {
+        if (!audio) return;
+        try {
+          audio.pause();
+          audio.currentTime = 0;
+          audio.volume = volume;
+          const p = audio.play();
+          if (p && typeof p.catch === "function") p.catch(() => {});
+        } catch (e) {}
+      }
+
+      function tocarClone(audio, volume = 1) {
+        if (!audio) return;
+        try {
+          const src =
+            audio.currentSrc ||
+            audio.getAttribute("src") ||
+            audio.querySelector("source")?.src;
+
+          if (!src) return;
+
+          const fx = new Audio(src);
+          fx.volume = volume;
+          fx.preload = "auto";
+          const p = fx.play();
+          if (p && typeof p.catch === "function") p.catch(() => {});
+        } catch (e) {}
+      }
+
+      function ativarAudio() {
+        if (audioAtivado) return;
+        audioAtivado = true;
+
+        if (!somEntradaTocado) {
+          somEntradaTocado = true;
+          tocarBase(audioChar, 0.7);
+        }
+
+        if (overlay) overlay.remove();
+      }
+
+      function linkSobPonteiro(ev) {
+        if (!overlay) return null;
+
+        const x =
+          typeof ev.clientX === "number"
+            ? ev.clientX
+            : ev.changedTouches?.[0]?.clientX;
+
+        const y =
+          typeof ev.clientY === "number"
+            ? ev.clientY
+            : ev.changedTouches?.[0]?.clientY;
+
+        if (typeof x !== "number" || typeof y !== "number") return null;
+
+        const oldPointerEvents = overlay.style.pointerEvents;
+        overlay.style.pointerEvents = "none";
+        const el = document.elementFromPoint(x, y);
+        overlay.style.pointerEvents = oldPointerEvents;
+
+        return el?.closest?.("a[href]") || null;
+      }
+
+      function primeiraInteracao(ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+
+        const anchor = linkSobPonteiro(ev);
+        ativarAudio();
+
+        if (anchor) {
+          tocarClone(audioClick, 0.55);
+          setTimeout(() => {
+            window.location.assign(anchor.href);
+          }, 80);
+        }
+      }
+
+      if (overlay) {
+        overlay.addEventListener("click", primeiraInteracao, { passive: false });
+        overlay.addEventListener("touchend", primeiraInteracao, { passive: false });
+
+        overlay.addEventListener("keydown", (ev) => {
+          if (ev.key === "Enter" || ev.key === " ") {
+            primeiraInteracao(ev);
+          }
+        });
+      }
+
+      document.addEventListener("pointerover", (ev) => {
+        if (!audioAtivado) return;
+        if (ev.pointerType && ev.pointerType !== "mouse") return;
+
+        const link = ev.target.closest?.("a[href]");
+        if (!link) return;
+
+        const agora = performance.now();
+        if (agora - ultimoHover < 90) return;
+        ultimoHover = agora;
+
+        tocarClone(audioHover, 0.35);
+      });
+
+      document.addEventListener("click", (ev) => {
+        const link = ev.target.closest?.("a[href]");
+        if (!link) return;
+        if (!audioAtivado) return;
+        if (ev.defaultPrevented) return;
+        if (link.target && link.target !== "_self") return;
+        if (link.hasAttribute("download")) return;
+        if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+
+        ev.preventDefault();
+        tocarClone(audioClick, 0.55);
+
+        setTimeout(() => {
+          window.location.assign(link.href);
+        }, 80);
+      });
+
+      document.addEventListener("touchstart", (ev) => {
+        const link = ev.target.closest?.("a[href]");
+        if (!link) return;
+        if (!audioAtivado) return;
+
+        tocarClone(audioClick, 0.55);
+      }, { passive: true });
+
+      function trazerMidPraFrente() {
+        calisthiaMidWrap.classList.add("front");
+        calisthiaMidWrap.classList.remove("back");
+
+        calisthiaCharWrap.classList.add("back");
+        calisthiaCharWrap.classList.remove("front");
+      }
+
+      function trazerCharPraFrente() {
+        calisthiaCharWrap.classList.add("front");
+        calisthiaCharWrap.classList.remove("back");
+
+        calisthiaMidWrap.classList.add("back");
+        calisthiaMidWrap.classList.remove("front");
+      }
+
+      trazerMidPraFrente();
+
+      calisthiaChar.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        if (audioAtivado) {
+          tocarClone(audioChar, 0.7);
+        }
+        trazerMidPraFrente();
+      });
+
+      calisthiaMid.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        if (audioAtivado) {
+          tocarClone(audioChar, 0.7);
+        }
+        trazerCharPraFrente();
+      });
+    })();
+  </script>
+</body>
+</html>
